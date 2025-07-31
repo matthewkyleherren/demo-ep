@@ -1,1 +1,61 @@
-import{j as e}from"./jsx-runtime.DAW3kIbQ.js";import{r as t}from"./index.l3JPYhe8.js";import{C as l}from"./index.DPypXweU.js";import"./_commonjsHelpers.Cpj98o6Y.js";const m=()=>{const[s,o]=t.useState(!1),i=()=>{o(!1)},a=r=>{r?.detail&&o(r.detail?.open)};return t.useEffect(()=>(s?document.body.classList.add("c-modal-open"):document.body.classList.remove("c-modal-open"),()=>{document.body.classList.remove("c-modal-open")}),[s]),t.useEffect(()=>(document.addEventListener("disclaimer-modal-event",a),()=>{document.removeEventListener("disclaimer-modal-event",a)}),[]),e.jsxs("div",{className:"u-relative u-z-highest print:u-hidden","data-lenis-prevent":!0,children:[e.jsx("div",{className:`u-transition-all u-duration-300 before:u-fixed before:u-inset-0 before:u-h-full before:u-bg-black/75 before:u-transition-all before:u-duration-300 ${s?"u-visible u-opacity-100":"u-invisible u-opacity-0"}`,onClick:()=>i()}),e.jsxs("div",{className:`u-fixed u-z-highest u-mx-auto u-max-h-screen u-w-full u-overflow-y-auto u-rounded-t-xl u-bg-white u-px-4 u-pb-[50px] u-pt-[18px] u-transition-all u-delay-100 u-duration-300 sm:u-left-1/2 sm:u-top-1/2 sm:u-max-w-[420px] sm:-u-translate-x-1/2 sm:-u-translate-y-1/2 sm:u-rounded-lg sm:u-pb-2.5 sm:u-pt-3 to-sm:u-rounded-b-none ${s?"u-visible u-scale-100 u-opacity-100 to-sm:u-bottom-0":"u-invisible u-opacity-0 sm:u-scale-90 to-sm:-u-bottom-full"}`,children:[e.jsx("div",{className:"u-absolute u-right-4 u-top-4 u-cursor-pointer [&_svg]:u-block [&_svg]:u-size-5",onClick:()=>i(),children:e.jsx(l,{})}),e.jsx("h3",{className:"c-h3 to-sm:u-mb-1",children:"Disclaimers"}),e.jsx("div",{className:"u-break-words",children:e.jsxs("ul",{className:"u-pb-[8.8px] u-pl-6 u-pt-3.5 sm:u-pt-3",children:[e.jsx("li",{className:"c-body-reg u-list-disc",children:"Initial production targeted to start in 2027 based on current projections, and is subject to change. The anticipated production date is an estimate and may be affected by various factors. Actual availability may differ."}),e.jsx("li",{className:"c-body-reg u-list-disc",children:"Simulated models and concept vehicles with options shown throughout. Animations shown are for illustrative purposes only and do not depict the actual product. Production model may vary and reflect market differences."}),e.jsx("li",{className:"c-body-reg u-list-disc",children:"Always consult your Owner’s Manual before off-road driving, know your terrain and trail difficulty, drive safely and obey traffic laws. Actual vehicle capability will depend various factors, including selected options, equipment, and trim."}),e.jsx("li",{className:"c-body-reg u-list-disc",children:"Any historic International Harvester Scout vehicle depicted is for illustrative purposes only. Not available for sale. Escort Privat Inc. does not offer reconditioned vehicles nor are we responsible for Scout vehicles produced by International Harvester. Please check reservation page for available options."})]})})]})]})};export{m as default};
+import {
+    j as e
+} from "./jsx-runtime.DAW3kIbQ.js";
+import {
+    r as t
+} from "./index.l3JPYhe8.js";
+import {
+    C as l
+} from "./index.DPypXweU.js";
+import "./_commonjsHelpers.Cpj98o6Y.js";
+const m = () => {
+    const [s, o] = t.useState(!1), i = () => {
+        o(!1)
+    }, a = r => {
+        r?.detail && o(r.detail?.open)
+    };
+    return t.useEffect(() => (s ? document.body.classList.add("c-modal-open") : document.body.classList.remove("c-modal-open"), () => {
+        document.body.classList.remove("c-modal-open")
+    }), [s]), t.useEffect(() => (document.addEventListener("disclaimer-modal-event", a), () => {
+        document.removeEventListener("disclaimer-modal-event", a)
+    }), []), e.jsxs("div", {
+        className: "u-relative u-z-highest print:u-hidden",
+        "data-lenis-prevent": !0,
+        children: [e.jsx("div", {
+            className: `u-transition-all u-duration-300 before:u-fixed before:u-inset-0 before:u-h-full before:u-bg-black/75 before:u-transition-all before:u-duration-300 ${s?"u-visible u-opacity-100":"u-invisible u-opacity-0"}`,
+            onClick: () => i()
+        }), e.jsxs("div", {
+            className: `u-fixed u-z-highest u-mx-auto u-max-h-screen u-w-full u-overflow-y-auto u-rounded-t-xl u-bg-white u-px-4 u-pb-[50px] u-pt-[18px] u-transition-all u-delay-100 u-duration-300 sm:u-left-1/2 sm:u-top-1/2 sm:u-max-w-[420px] sm:-u-translate-x-1/2 sm:-u-translate-y-1/2 sm:u-rounded-lg sm:u-pb-2.5 sm:u-pt-3 to-sm:u-rounded-b-none ${s?"u-visible u-scale-100 u-opacity-100 to-sm:u-bottom-0":"u-invisible u-opacity-0 sm:u-scale-90 to-sm:-u-bottom-full"}`,
+            children: [e.jsx("div", {
+                className: "u-absolute u-right-4 u-top-4 u-cursor-pointer [&_svg]:u-block [&_svg]:u-size-5",
+                onClick: () => i(),
+                children: e.jsx(l, {})
+            }), e.jsx("h3", {
+                className: "c-h3 to-sm:u-mb-1",
+                children: "Disclaimers"
+            }), e.jsx("div", {
+                className: "u-break-words",
+                children: e.jsxs("ul", {
+                    className: "u-pb-[8.8px] u-pl-6 u-pt-3.5 sm:u-pt-3",
+                    children: [e.jsx("li", {
+                        className: "c-body-reg u-list-disc",
+                        children: "Initial production targeted to start in 2027 based on current projections, and is subject to change. The anticipated production date is an estimate and may be affected by various factors. Actual availability may differ."
+                    }), e.jsx("li", {
+                        className: "c-body-reg u-list-disc",
+                        children: "Simulated models and concept vehicles with options shown throughout. Animations shown are for illustrative purposes only and do not depict the actual product. Production model may vary and reflect market differences."
+                    }), e.jsx("li", {
+                        className: "c-body-reg u-list-disc",
+                        children: "Always consult your Owner’s Manual before off-road driving, know your terrain and trail difficulty, drive safely and obey traffic laws. Actual vehicle capability will depend various factors, including selected options, equipment, and trim."
+                    }), e.jsx("li", {
+                        className: "c-body-reg u-list-disc",
+                        children: "Any historic International Harvester Scout vehicle depicted is for illustrative purposes only. Not available for sale. Escort Privat Inc. does not offer reconditioned vehicles nor are we responsible for Scout vehicles produced by International Harvester. Please check reservation page for available options."
+                    })]
+                })
+            })]
+        })]
+    })
+};
+export {
+    m as
+    default
+};

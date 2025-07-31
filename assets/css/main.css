@@ -1,0 +1,442 @@
+/* Main CSS file - extracted from inline styles */
+
+/* Reveal Events Styles */
+.reveal-events {
+    padding-top: 102px;
+}
+
+@media (max-width: 1199px) {
+    .reveal-events {
+        padding-top: 80px;
+    }
+}
+
+@media (max-width: 998px) {
+    .reveal-events {
+        padding-top: 60px;
+    }
+}
+
+/* Modal Styles */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 60%;
+    max-height: 70%;
+    background: #fff;
+    padding: 0;
+    box-shadow: 0 4px 8px #0003;
+    border-radius: 4px;
+    height: 100%;
+}
+
+@media (max-width: 998px) {
+    .modal-content {
+        max-width: 90%;
+        max-height: 65%;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 998px) {
+    .modal-content {
+        max-height: 90%;
+    }
+}
+
+.modal-content img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 999;
+    color: #fff;
+}
+
+/* Swiper Styles */
+.swiper-slide img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    max-height: 86px;
+    min-height: 86px;
+}
+
+@media (min-width: 700px) {
+    .swiper-slide img {
+        max-height: 150px;
+        min-height: 150px;
+    }
+}
+
+.swiper-button-next.swiper-button-disabled.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled.swiper-button-disabled {
+    pointer-events: auto;
+    cursor: not-allowed;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
+    opacity: 0.75;
+}
+
+.modal-content .swiper-slide img {
+    min-height: 100% !important;
+    width: 100% !important;
+    object-fit: cover;
+    max-height: 100% !important;
+    object-position: center;
+}
+
+.modal-content .swiper-button-next.swiper-button-disabled,
+.modal-content .swiper-button-prev.swiper-button-disabled {
+    background-color: transparent !important;
+}
+
+.modal-content .swiper-button-next.swiper-button-disabled:after,
+.modal-content .swiper-button-prev.swiper-button-disabled:after {
+    opacity: 0.5;
+}
+
+.modal-content .swiper-button-prev,
+.modal-content .swiper-button-next {
+    color: rgb(255 255 255 / var(--tw-text-opacity, 1)) !important;
+}
+
+.modal-content .swiper-button-prev:after,
+.modal-content .swiper-button-next:after {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
+@media (min-width: 1000px) {
+
+    .modal-content .swiper-button-prev:after,
+    .modal-content .swiper-button-next:after {
+        font-size: 36px;
+    }
+}
+
+.swiper-button-prev {
+    left: 2rem;
+    top: 50%;
+    margin: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+.swiper-button-next {
+    right: 2rem;
+    top: 50%;
+    margin: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+}
+
+/* Animation Styles */
+.fade-in {
+    opacity: 1;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+/* Loading Skeleton Animation */
+@keyframes react-loading-skeleton {
+    to {
+        transform: translate(100%);
+    }
+}
+
+.react-loading-skeleton {
+    --base-color: #ebebeb;
+    --highlight-color: #f5f5f5;
+    --animation-duration: 1.5s;
+    --animation-direction: normal;
+    --pseudo-element-display: block;
+    background-color: var(--base-color);
+    width: 100%;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    line-height: 1;
+    position: relative;
+    user-select: none;
+    overflow: hidden;
+}
+
+.react-loading-skeleton:after {
+    content: " ";
+    display: var(--pseudo-element-display);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: var(--custom-highlight-background, linear-gradient(90deg, var(--base-color) 0%, var(--highlight-color) 50%, var(--base-color) 100%));
+    transform: translate(-100%);
+    animation-name: react-loading-skeleton;
+    animation-direction: var(--animation-direction);
+    animation-duration: var(--animation-duration);
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion) {
+    .react-loading-skeleton {
+        --pseudo-element-display: none;
+    }
+}
+
+/* Lazy Load Image Styles */
+.lazy-load-image-background.opacity {
+    opacity: 0;
+}
+
+.lazy-load-image-background.opacity.lazy-load-image-loaded {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+/* Reserve Form Drawer Styles */
+.reserve-form-drawer .reserve-form {
+    margin: 0;
+    padding-left: 1rem;
+    padding-right: 0.75rem;
+}
+
+@media (min-width: 700px) {
+    .reserve-form-drawer .reserve-form {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 55px;
+        padding-bottom: 55px;
+    }
+}
+
+@media (min-width: 1000px) {
+    .reserve-form-drawer .reserve-form {
+        padding-left: 45px;
+        padding-right: 45px;
+    }
+}
+
+@media (max-width: 699px) {
+    .reserve-form-drawer .reserve-form {
+        border-radius: 26px 26px 0 0/26px 26px 0px 0px;
+    }
+}
+
+.reserve-form-drawer .reserve-form {
+    background-image: none !important;
+    border-radius: 0 !important;
+}
+
+.reserve-form-drawer .reserve-form .u-container-small {
+    max-width: 100%;
+    padding: 0;
+}
+
+/* Drawer Open Styles */
+.c-drawer-open {
+    overflow: hidden;
+}
+
+.c-drawer-open:after {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    background-color: #01010180;
+    opacity: 1;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    content: var(--tw-content);
+    transition-duration: 0.3s;
+}
+
+/* Astro Island Styles */
+astro-island,
+astro-slot,
+astro-static-slot {
+    display: contents;
+}
+
+/* Gallery Container Styles */
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu] {
+    overflow: hidden;
+    grid-column: span 32;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(1) {
+    grid-row: span 16;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(4) {
+    grid-row: span 60;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(7) {
+    grid-row: span 20;
+    grid-column: 1/33;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(2) {
+    grid-row: span 37;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(5) {
+    grid-row: span 28;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(8) {
+    grid-row: 66/97;
+    grid-column: 33/65;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(3) {
+    grid-row: span 40;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(6) {
+    grid-row: span 38;
+}
+
+.c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(9) {
+    grid-row: span 18;
+}
+
+@media (max-width: 998px) {
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu] {
+        width: calc(33.3333333333% - 2.6666666667px);
+    }
+
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(4),
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(5) {
+        width: 27%;
+    }
+
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(6) {
+        width: calc(46% - 8px);
+    }
+
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(7),
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(9) {
+        width: 31.3%;
+    }
+
+    .c-gallery-container[data-astro-cid-umhq4qxu] ul[data-astro-cid-umhq4qxu] li[data-astro-cid-umhq4qxu]:nth-child(8) {
+        width: calc(37.4% - 8px);
+    }
+}
+
+/* Swiper Container Model Styles */
+.c-swiper-container-model[data-astro-cid-72ptxo7x] .swiper[data-astro-cid-72ptxo7x] {
+    --thumbnailSize: 64px;
+}
+
+@media (max-width: 998px) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .swiper[data-astro-cid-72ptxo7x] {
+        --img_size: 92px;
+        --thumbnailSize: 50%;
+        --bottom_space: 43px;
+    }
+}
+
+@media (max-width: 699px) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .swiper[data-astro-cid-72ptxo7x] {
+        --thumbnailSize: 65%;
+    }
+}
+
+@media (max-width: 390px) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .swiper[data-astro-cid-72ptxo7x] {
+        --img_size: 75px;
+        --thumbnailSize: 60%;
+    }
+}
+
+@media (min-width: 1000px) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] .swiper-slide[data-astro-cid-72ptxo7x] {
+        width: var(--thumbnailSize) !important;
+        height: var(--thumbnailSize);
+    }
+}
+
+@media (max-width: 998px) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-slider[data-astro-cid-72ptxo7x] {
+        height: calc(100% - var(--thumbnailSize) + 37px);
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] {
+        margin-bottom: var(--bottom_space);
+        height: calc(var(--thumbnailSize) + 16px - var(--bottom_space));
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] .swiper-wrapper[data-astro-cid-72ptxo7x] {
+        padding-inline: 9.5px;
+        width: calc(100% - 19px);
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(var(--img_size), 100%), 1fr));
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] .swiper-wrapper[data-astro-cid-72ptxo7x] .swiper-slide[data-astro-cid-72ptxo7x] {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] .swiper-wrapper[data-astro-cid-72ptxo7x]::-webkit-scrollbar {
+        width: 0;
+    }
+}
+
+@media (max-width: 998px) and (orientation: landscape) {
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .swiper[data-astro-cid-72ptxo7x] {
+        --img_size: 92px;
+        --thumbnailSize: calc(var(--img_size) + 8px * 5);
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-slider[data-astro-cid-72ptxo7x].swiper-slide img[data-astro-cid-72ptxo7x] {
+        object-fit: contain;
+    }
+
+    .c-swiper-container-model[data-astro-cid-72ptxo7x] .c-gallery-thumbnail[data-astro-cid-72ptxo7x] {
+        padding-bottom: 8px;
+        height: calc(var(--thumbnailSize) + 16px);
+        margin-bottom: 0;
+    }
+
+    .c-outline-small-button[data-astro-cid-72ptxo7x]:not([aria-label="Close modal"]) {
+        position: static;
+        transform: none;
+        height: 32px !important;
+        min-width: 124px;
+        font-size: 12px;
+    }
+}
+
+.swiper-button-centered-prev[data-astro-cid-72ptxo7x].swiper-button-disabled,
+.swiper-button-centered-next[data-astro-cid-72ptxo7x].swiper-button-disabled {
+    background-color: transparent;
+}

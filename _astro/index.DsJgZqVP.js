@@ -1,1 +1,15 @@
-import{r as l}from"./index.l3JPYhe8.js";import{l as u}from"./index.CJ4e7_2M.js";function c(e,r={}){let i=l.useCallback(s=>r.keys?u(e,r.keys,s):e.listen(s),[r.keys,e]),t=e.get.bind(e);return l.useSyncExternalStore(i,t,t)}export{c as u};
+import {
+    r as l
+} from "./index.l3JPYhe8.js";
+import {
+    l as u
+} from "./index.CJ4e7_2M.js";
+
+function c(e, r = {}) {
+    let i = l.useCallback(s => r.keys ? u(e, r.keys, s) : e.listen(s), [r.keys, e]),
+        t = e.get.bind(e);
+    return l.useSyncExternalStore(i, t, t)
+}
+export {
+    c as u
+};

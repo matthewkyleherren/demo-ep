@@ -1,1 +1,20 @@
-import{j as t}from"./jsx-runtime.DAW3kIbQ.js";import{r}from"./index.l3JPYhe8.js";import{h as o}from"./auth0.lVSljASH.js";import"./_commonjsHelpers.Cpj98o6Y.js";import"./reactive.DqYsbDQg.js";import"./index.BSdFiPHn.js";import"./clsx.B-dksMZM.js";const n=()=>(r.useEffect(()=>{o()},[]),t.jsx(t.Fragment,{}));export{n as default};
+import {
+    j as t
+} from "./jsx-runtime.DAW3kIbQ.js";
+import {
+    r
+} from "./index.l3JPYhe8.js";
+import {
+    h as o
+} from "./auth0.lVSljASH.js";
+import "./_commonjsHelpers.Cpj98o6Y.js";
+import "./reactive.DqYsbDQg.js";
+import "./index.BSdFiPHn.js";
+import "./clsx.B-dksMZM.js";
+const n = () => (r.useEffect(() => {
+    o()
+}, []), t.jsx(t.Fragment, {}));
+export {
+    n as
+    default
+};

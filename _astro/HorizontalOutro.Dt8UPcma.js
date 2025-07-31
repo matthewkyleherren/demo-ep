@@ -1,1 +1,609 @@
-import{$ as g}from"./AutoplayVideo.CtUmkCwP.js";import{$ as T}from"./Scroll.Bt_JG0O1.js";import{c as l,m as h}from"./maths.BC202PIA.js";import{$ as m}from"./hoisted.DEENYDYk.js";import{s as u}from"./index.CJ4e7_2M.js";import{g as r}from"./index.BDT3iC5Q.js";class S extends HTMLElement{unbindScreenListener=()=>{};unbindTouchOrSmallListener=()=>{};$root;$sliderItems;$dummyItems;$dummyIntro;$dummyOutro;items;mainProgressEvent;introProgressEvent;outroProgressEvent;wWidth;wHeight;totalItemsHeight;totalSequenceHeight;$slider;sequenceIntroProgress;sequenceOutroProgress;sequenceProgress;constructor(){super(),this.onResize=this.onResize.bind(this),this.onTouchOrSmallStatusChange=this.onTouchOrSmallStatusChange.bind(this),this.onScrollSequenceProgress=this.onScrollSequenceProgress.bind(this),this.onScrollIntroProgress=this.onScrollIntroProgress.bind(this),this.onScrollOutroProgress=this.onScrollOutroProgress.bind(this),this.$root=this.querySelector("[data-horizontal-root]"),this.$slider=this.querySelector("[data-horizontal-slider]"),this.$sliderItems=this.querySelectorAll("[data-horizonal-item]"),this.$dummyItems=this.querySelectorAll("[data-horizonal-dummy-item]"),this.$dummyIntro=this.querySelector("[data-horizonal-dummy-intro]"),this.$dummyOutro=this.querySelector("[data-horizonal-dummy-outro]"),this.mainProgressEvent=this.$root.getAttribute("data-scroll-event-progress"),this.introProgressEvent=this.$dummyIntro.getAttribute("data-scroll-event-progress"),this.outroProgressEvent=this.$dummyOutro.getAttribute("data-scroll-event-progress"),this.items=Array.from(this.$sliderItems).map((e,t)=>{const s=e;return{$root:s,$el:s.children[0],$dummy:this.$dummyItems[t],dummyHeight:s.offsetWidth,startProgressThreshold:0,startCurrentProgressThreshold:0,endProgressThreshold:0}}),this.totalItemsHeight=this.getTotalItemsHeight(),this.totalSequenceHeight=this.getTotalSequenceHeight(),this.wHeight=window.innerHeight,this.wWidth=document.body.offsetWidth,this.sequenceProgress=0,this.sequenceIntroProgress=0,this.sequenceOutroProgress=0}connectedCallback(){this.unbindTouchOrSmallListener=u(g,["isTouchOrSmall"],this.onTouchOrSmallStatusChange)}disconnectedCallback(){this.unbindTouchOrSmallListener?.(),this.unbindEvents()}bindEvents(){this.unbindScreenListener=m.subscribe(this.onResize),this.mainProgressEvent&&window.addEventListener(this.mainProgressEvent,this.onScrollSequenceProgress),this.introProgressEvent&&window.addEventListener(this.introProgressEvent,this.onScrollIntroProgress),this.outroProgressEvent&&window.addEventListener(this.outroProgressEvent,this.onScrollOutroProgress)}unbindEvents(){this.unbindScreenListener?.(),this.mainProgressEvent&&window.removeEventListener(this.mainProgressEvent,this.onScrollSequenceProgress),this.introProgressEvent&&window.removeEventListener(this.introProgressEvent,this.onScrollIntroProgress),this.outroProgressEvent&&window.removeEventListener(this.outroProgressEvent,this.onScrollOutroProgress)}onResize({height:e}){this.wHeight=e,this.wWidth=document.body.offsetWidth,this.totalItemsHeight=this.getTotalItemsHeight(),this.totalSequenceHeight=this.getTotalSequenceHeight(),this.setMetrics(),this.applyHeight(),requestAnimationFrame(()=>{this.translateSlider(),this.setScrollProgressesChange()})}onScrollSequenceProgress(e){const{progress:t}=e.detail;this.sequenceProgress=t,this.translateSlider(),this.setScrollProgressesChange()}onScrollIntroProgress(e){const{progress:t}=e.detail;this.sequenceIntroProgress=t}onScrollOutroProgress(e){const{progress:t}=e.detail;this.sequenceOutroProgress=t}onTouchOrSmallStatusChange(e){e.isTouchOrSmall?(this.unbindEvents(),this.reset()):this.bindEvents()}setMetrics(){let e=0;this.items=this.items.map(({$root:t},s)=>{const i={...this.items[s],dummyHeight:t.offsetWidth};return s===0?(e+=this.wHeight,i.startProgressThreshold=0,i.startCurrentProgressThreshold=e/this.totalSequenceHeight):(i.startProgressThreshold=(e-this.wWidth)/this.totalSequenceHeight,i.startCurrentProgressThreshold=(e-this.wWidth)/this.totalSequenceHeight),i.endProgressThreshold=(e+i.dummyHeight)/this.totalSequenceHeight,e+=i.dummyHeight,i})}getTotalItemsHeight(){return this.items.reduce((e,{$root:t})=>e+t.offsetWidth,0)}applyHeight(){this.items.forEach(({$dummy:e,$root:t})=>{e.style.setProperty("--dummy-height",`${t.offsetWidth}px`)}),requestAnimationFrame(()=>{T.get()?.resize()})}getTotalSequenceHeight(){return this.totalItemsHeight+this.wHeight}translateSlider(){const e=1-this.totalItemsHeight/this.totalSequenceHeight,t=l(0,this.totalItemsHeight,h(e,1,0,this.totalItemsHeight,this.sequenceProgress))||0;this.$slider.style.transform=`translate3d(-${t}px,0,0)`}setScrollProgressesChange(){this.items.forEach(({startProgressThreshold:e,startCurrentProgressThreshold:t,endProgressThreshold:s,$el:i})=>{const a=l(0,1,h(e,s,0,1,this.sequenceProgress)),c=l(0,1,h(t,s,0,1,this.sequenceProgress));i.onScrollProgressesChange({sequenceIntroProgress:this.sequenceIntroProgress,sequenceOutroProgress:this.sequenceOutroProgress,currentProgress:c,progress:a})})}reset(){this.$slider.style.transform="",this.items.forEach(({$el:e})=>{e?.reset?.()})}}customElements.define("c-horizontal",S);class d extends HTMLElement{static FIRST_TRANSLATE_VALUE=1.2;static LAST_TRANSLATE_VALUE=1.75;static DEGREE_INCREMENT_VALUE=1;unbindScreenListener=()=>{};$words;$rotatedIcon;wordsTimelines;progress;rotationTimeline=r.timeline({paused:!0});$underlines;constructor(){super(),this.onResize=this.onResize.bind(this),this.$words=this.querySelectorAll("[data-translated-word]"),this.$rotatedIcon=this.querySelector("[data-rotate-icon]"),this.$underlines=Array.from(this.querySelectorAll("[data-underline]")),this.wordsTimelines=[],this.progress=0}connectedCallback(){this.bindEvents(),this.setWordsTimelines(),this.setRotationTimeline()}disconnectedCallback(){this.unbindEvents()}bindEvents(){this.unbindScreenListener=m.subscribe(this.onResize)}unbindEvents(){this.unbindScreenListener?.()}onScrollProgressesChange({progress:e,sequenceIntroProgress:t}){this.progress!=e&&(this.playRotationTimeline(e),this.playWordsTimelines(e),this.progress=e,this.classList.toggle("is-active",t>.8))}onResize(){this.setUnderlinesDashProperty()}setWordsTimelines(){this.$words.forEach((e,t)=>{const s=t%2?d.LAST_TRANSLATE_VALUE:d.FIRST_TRANSLATE_VALUE,i=t*.2,a=r.timeline({paused:!0});a.to(e,{duration:1,x:`${s}em`,ease:"power2.out",delay:i}),this.wordsTimelines.push(a)})}setRotationTimeline(){this.rotationTimeline.to(this.$rotatedIcon,{duration:1,rotation:180*2,ease:"linear"})}setUnderlinesDashProperty(){window.requestAnimationFrame(()=>{this.$underlines.forEach(e=>{const t=e.querySelector("path");if(!t)return;const s=t.getBoundingClientRect(),i=t.getBBox();if(i.width===0||s.width===0)return;const a=s.width/i.width,c=t.getTotalLength()*a;e.style.setProperty("--path-length",isNaN(c)?"0":`${c}`)})})}playWordsTimelines(e){this.wordsTimelines.forEach(t=>{t.progress(e)})}playRotationTimeline(e){this.rotationTimeline.progress(e)}reset(){this.wordsTimelines.forEach((e,t)=>{e.kill(),r.set(this.$words[t],{clearProps:"all"})}),this.rotationTimeline.kill(),r.set(this.$rotatedIcon,{clearProps:"all"})}}customElements.define("c-horizontal-hero",d);const P={FIXED_PROGRESS:"FixedProgress"};class n extends HTMLElement{static PARALLAX_TRANSLATE_RATIO=.25;static PARALLAX_TRANSLATE_RANGE_MIN=200;static PARALLAX_RANDOM_RANGE=[.9,1.1];static CONTAINER_PADDING=40;static CONTAINER_NEGATIVE_OFFSET=140;unbindScreenListener=()=>{};unbindTouchOrSmallListener=()=>{};$parallaxItems;parallaxTimelines;wHeight;parallaxTranslateRange;progress;$parallaxImages;$parallaxRandomSpeeds;$container;containerNegativeOffset;containerParallaxTimeline;fixedProgressRange=[0,0];uid;$slotChildren;$rotatedIcon;rotationTimeline=r.timeline({paused:!0});constructor(){super(),this.onResize=this.onResize.bind(this),this.onTouchOrSmallStatusChange=this.onTouchOrSmallStatusChange.bind(this),this.$parallaxItems=this.querySelectorAll("[data-gallery-parallax]"),this.$parallaxImages=Array.from(this.$parallaxItems).map(e=>e.querySelector("[data-image]")).filter(e=>e!==null),this.$parallaxRandomSpeeds=this.$parallaxImages.map(()=>r.utils.random(n.PARALLAX_RANDOM_RANGE[0],n.PARALLAX_RANDOM_RANGE[1])),this.$container=this.querySelector("[data-container]"),this.$rotatedIcon=this.querySelector("[data-rotate-icon]"),this.uid=this.dataset.uid,this.parallaxTimelines=[],this.containerParallaxTimeline=r.timeline({paused:!0}),this.wHeight=window.innerHeight,this.parallaxTranslateRange=Math.max(n.PARALLAX_TRANSLATE_RANGE_MIN,this.wHeight*n.PARALLAX_TRANSLATE_RATIO),this.progress=0,this.containerNegativeOffset=(this.offsetWidth-this.$container.offsetWidth+n.CONTAINER_PADDING+n.CONTAINER_NEGATIVE_OFFSET)*-1,this.$slotChildren=Array.from(this.querySelector("[data-slot]").children)}connectedCallback(){this.unbindTouchOrSmallListener=u(g,["isTouchOrSmall"],this.onTouchOrSmallStatusChange),this.$rotatedIcon&&this.setRotationTimeline()}disconnectedCallback(){this.unbindTouchOrSmallListener?.(),this.unbindEvents(),this.$slotChildren.forEach(e=>{e.remove()})}bindEvents(){this.unbindScreenListener=m.subscribe(this.onResize)}unbindEvents(){this.unbindScreenListener?.()}onScrollProgressesChange({progress:e}){if(this.progress!=e){this.playParallaxTimelines(e),this.playContainerParallaxTimeline(e),this.$rotatedIcon&&this.playRotationTimeline(e),this.progress=e;const t=l(0,1,h(this.fixedProgressRange[0],this.fixedProgressRange[1],0,1,e)),s=new CustomEvent(`${this.uid}${P.FIXED_PROGRESS}`,{detail:{progress:t}});window.dispatchEvent(s)}}onResize({width:e,height:t}){requestAnimationFrame(()=>{this.wHeight=t,this.parallaxTranslateRange=Math.max(n.PARALLAX_TRANSLATE_RANGE_MIN,this.wHeight*n.PARALLAX_TRANSLATE_RATIO),this.containerNegativeOffset=(this.offsetWidth-this.$container.offsetWidth+n.CONTAINER_PADDING+n.CONTAINER_NEGATIVE_OFFSET)*-1,this.setParallaxTimelines(),this.setContainerParallaxTimeline();const s=e/2,i=this.$container.offsetWidth+e*2;this.fixedProgressRange=[(s-this.containerNegativeOffset)/i,(i-s+this.containerNegativeOffset)/i]})}onTouchOrSmallStatusChange(e){e.isTouchOrSmall?(this.unbindEvents(),this.reset()):this.bindEvents()}setParallaxTimelines(){this.parallaxTimelines.length&&(this.parallaxTimelines.forEach(e=>e.kill()),this.parallaxTimelines=[]),requestAnimationFrame(()=>{this.$parallaxImages.forEach((e,t)=>{const s=r.timeline({paused:!0});s.set(e,{x:this.parallaxTranslateRange/2*this.$parallaxRandomSpeeds[t]*-1}),requestAnimationFrame(()=>{s.to(e,{x:this.parallaxTranslateRange/2*this.$parallaxRandomSpeeds[t],duration:1,ease:"linear"}),this.progress>0?s.progress(this.progress):s.progress(1e-4),this.parallaxTimelines.push(s)})})})}setContainerParallaxTimeline(){this.containerParallaxTimeline?.kill(),this.containerParallaxTimeline=r.timeline({paused:!0}),this.containerParallaxTimeline.set(this.$container,{x:this.containerNegativeOffset}),requestAnimationFrame(()=>{this.containerParallaxTimeline.to(this.$container,{x:0,duration:1,ease:"linear"}),this.progress>0?this.containerParallaxTimeline.progress(this.progress):this.containerParallaxTimeline.progress(1e-4)})}setRotationTimeline(){this.rotationTimeline.to(this.$rotatedIcon,{duration:1,rotation:360*-.6,ease:"linear"})}playParallaxTimelines(e){this.parallaxTimelines.forEach(t=>{t.progress(e)})}playContainerParallaxTimeline(e){this.containerParallaxTimeline.progress(e)}playRotationTimeline(e){this.rotationTimeline.progress(e)}reset(){this.parallaxTimelines.forEach((e,t)=>{e.kill(),r.set(this.$parallaxImages[t],{clearProps:"all"})}),this.containerParallaxTimeline.kill(),r.set(this.$container,{clearProps:"all"}),this.rotationTimeline.kill(),r.set(this.$rotatedIcon,{clearProps:"all"})}}customElements.define("c-horizontal-gallery",n);class o extends HTMLElement{static THRESHOLD=.1;static VISIBLE_CLASS="is-visible";isVisible=!1;progress=0;$rotatedIcon;rotationTimeline=r.timeline({paused:!0});constructor(){super(),this.$rotatedIcon=this.querySelector("[data-rotate-icon]")}connectedCallback(){this.bindEvents(),this.setRotationTimeline()}disconnectedCallback(){this.unbindEvents()}bindEvents(){}unbindEvents(){}onScrollProgressesChange({progress:e}){this.progress!=e&&(this.setVisibility(),this.playRotationTimeline(e),this.progress=e)}setVisibility(){this.progress>=o.THRESHOLD&&this.progress<=1-o.THRESHOLD&&!this.isVisible?(this.isVisible=!0,this.classList.add(o.VISIBLE_CLASS)):(this.progress<o.THRESHOLD||this.progress>1-o.THRESHOLD)&&this.isVisible&&(this.isVisible=!1,this.classList.remove(o.VISIBLE_CLASS))}setRotationTimeline(){this.rotationTimeline.to(this.$rotatedIcon,{duration:1,rotation:360*.3,ease:"linear"})}playRotationTimeline(e){this.rotationTimeline.progress(e)}reset(){this.isVisible=!1,this.classList.remove(o.VISIBLE_CLASS),this.rotationTimeline.kill(),r.set(this.$rotatedIcon,{clearProps:"all"})}}customElements.define("c-horizontal-text",o);class E extends HTMLElement{unbindScreenListener=()=>{};unbindTouchOrSmallListener=()=>{};$root;$backgroundImage;$clippedImage;mainProgressEvent;wWidth;wHeight;totalHeight;progress=0;sequenceProgresses;clipPathData;imageRatioData;clippedImageData;$clipRef;fromClip={x:0,y:0};fromScale=0;clipTimeline=r.timeline({paused:!0});scaleTimeline=r.timeline({paused:!0});scaleBackgroundTimeline=r.timeline({paused:!0});constructor(){super(),this.onResize=this.onResize.bind(this),this.onScrollProgress=this.onScrollProgress.bind(this),this.onTouchOrSmallStatusChange=this.onTouchOrSmallStatusChange.bind(this),this.$root=this.querySelector("[data-horizontal-root]"),this.$backgroundImage=this.querySelector("[data-background-image]"),this.$clippedImage=this.querySelector("[data-clipped-image]"),this.$clipRef=this.querySelector("[data-clipped-image-ref]"),this.mainProgressEvent=this.$root.getAttribute("data-scroll-event-progress"),this.wHeight=window.innerHeight,this.wWidth=document.body.offsetWidth,this.totalHeight=this.$root.offsetHeight,this.sequenceProgresses={entering:{startThreshold:0,endThreshold:0,value:0},current:{startThreshold:0,endThreshold:1,value:0}},this.clipPathData=JSON.parse(this.$clippedImage.getAttribute("data-clip-data")??JSON.stringify({width:100,height:100})),this.imageRatioData=JSON.parse(this.$clippedImage.getAttribute("data-image-ratio-data")??JSON.stringify({width:100,height:100})),this.clippedImageData={width:0,height:0}}connectedCallback(){this.unbindTouchOrSmallListener=u(g,["isTouchOrSmall"],this.onTouchOrSmallStatusChange)}disconnectedCallback(){this.unbindTouchOrSmallListener?.(),this.unbindEvents()}bindEvents(){this.unbindScreenListener=m.subscribe(this.onResize),this.mainProgressEvent&&window.addEventListener(this.mainProgressEvent,this.onScrollProgress)}unbindEvents(){this.unbindScreenListener?.(),this.mainProgressEvent&&window.removeEventListener(this.mainProgressEvent,this.onScrollProgress)}onResize({height:e}){this.wHeight=e,this.wWidth=document.body.offsetWidth,this.totalHeight=this.$root.offsetHeight-this.wHeight,this.computeProgressesMetrics(),this.computeAllProgress(),this.applyCoverStyle(),this.setFromValues(),this.setClipTimeline(),this.setScaleTimeline(),this.setScaleBackgroundTimeline()}onScrollProgress(e){const{progress:t}=e.detail;this.progress=t,this.computeAllProgress()}onTouchOrSmallStatusChange(e){e.isTouchOrSmall?(this.unbindEvents(),this.reset()):(this.resetTouchOrSmall(),this.bindEvents())}computeProgressesMetrics(){Object.keys(this.sequenceProgresses).forEach(e=>{const t=this.sequenceProgresses[e];switch(e){case"entering":t.startThreshold=0,t.endThreshold=this.wWidth/this.totalHeight;break;case"current":t.startThreshold=this.wWidth/this.totalHeight,t.endThreshold=1;break}})}computeAllProgress(){Object.keys(this.sequenceProgresses).forEach(e=>{const t=this.sequenceProgresses[e],{startThreshold:s,endThreshold:i}=t,a=l(0,1,h(s,i,0,1,this.progress));t.value=a}),this.playClipTimeline(this.progress),this.playScaleTimeline(this.progress),this.playScaleBackgroundTimeline(this.progress)}applyCoverStyle(){const e=this.wWidth/this.wHeight,t=this.imageRatioData.width,s=this.imageRatioData.height,i=t/s;i>e||(this.clippedImageData.width=this.wWidth,this.clippedImageData.height=this.wWidth/i,this.$clippedImage.style.width=`${this.clippedImageData.width}px`,this.$clippedImage.style.height=`${this.clippedImageData.height}px`)}setFromValues(){const e=(1-this.clipPathData.width/this.imageRatioData.width)/2,t=(1-this.clipPathData.height/this.imageRatioData.height)/2,s=this.clippedImageData.width*e*2,a=this.$clipRef.offsetWidth/(this.clippedImageData.width-s);this.fromClip={x:this.clippedImageData.width*e,y:this.clippedImageData.height*t},this.fromScale=a}setClipTimeline(){this.clipTimeline?.kill(),this.clipTimeline=r.timeline({paused:!0}),this.clipTimeline.set(this.$clippedImage,{clipPath:`inset(${this.fromClip.y}px ${this.fromClip.x}px round 24px)`}),requestAnimationFrame(()=>{this.clipTimeline.to(this.$clippedImage,{clipPath:"inset(0px 0px round 0px)",duration:1,ease:"power4.in"})})}setScaleTimeline(){this.scaleTimeline?.kill(),this.scaleTimeline=r.timeline({paused:!0}),this.scaleTimeline.set(this.$clippedImage,{scale:this.fromScale}),requestAnimationFrame(()=>{this.scaleTimeline.to(this.$clippedImage,{scale:1,duration:1,ease:"power4.in"})})}setScaleBackgroundTimeline(){this.scaleBackgroundTimeline?.kill(),this.scaleBackgroundTimeline=r.timeline({paused:!0}),this.scaleBackgroundTimeline.to(this.$backgroundImage,{scale:1.2,duration:1,ease:"linear"})}playClipTimeline(e){this.clipTimeline.progress(e)}playScaleTimeline(e){this.scaleTimeline.progress(e)}playScaleBackgroundTimeline(e){this.scaleBackgroundTimeline.progress(e)}reset(){this.clipTimeline.kill(),this.scaleTimeline.kill(),this.scaleBackgroundTimeline.kill(),r.set(this.$clippedImage,{clearProps:"all"}),r.set(this.$backgroundImage,{clearProps:"all"})}resetTouchOrSmall(){r.set(this.$clippedImage,{clearProps:"all"})}}customElements.define("c-horizontal-outro",E);export{P as H};
+import {
+    $ as g
+} from "./AutoplayVideo.CtUmkCwP.js";
+import {
+    $ as T
+} from "./Scroll.Bt_JG0O1.js";
+import {
+    c as l,
+    m as h
+} from "./maths.BC202PIA.js";
+import {
+    $ as m
+} from "./hoisted.DEENYDYk.js";
+import {
+    s as u
+} from "./index.CJ4e7_2M.js";
+import {
+    g as r
+} from "./index.BDT3iC5Q.js";
+class S extends HTMLElement {
+    unbindScreenListener = () => {};
+    unbindTouchOrSmallListener = () => {};
+    $root;
+    $sliderItems;
+    $dummyItems;
+    $dummyIntro;
+    $dummyOutro;
+    items;
+    mainProgressEvent;
+    introProgressEvent;
+    outroProgressEvent;
+    wWidth;
+    wHeight;
+    totalItemsHeight;
+    totalSequenceHeight;
+    $slider;
+    sequenceIntroProgress;
+    sequenceOutroProgress;
+    sequenceProgress;
+    constructor() {
+        super(), this.onResize = this.onResize.bind(this), this.onTouchOrSmallStatusChange = this.onTouchOrSmallStatusChange.bind(this), this.onScrollSequenceProgress = this.onScrollSequenceProgress.bind(this), this.onScrollIntroProgress = this.onScrollIntroProgress.bind(this), this.onScrollOutroProgress = this.onScrollOutroProgress.bind(this), this.$root = this.querySelector("[data-horizontal-root]"), this.$slider = this.querySelector("[data-horizontal-slider]"), this.$sliderItems = this.querySelectorAll("[data-horizonal-item]"), this.$dummyItems = this.querySelectorAll("[data-horizonal-dummy-item]"), this.$dummyIntro = this.querySelector("[data-horizonal-dummy-intro]"), this.$dummyOutro = this.querySelector("[data-horizonal-dummy-outro]"), this.mainProgressEvent = this.$root.getAttribute("data-scroll-event-progress"), this.introProgressEvent = this.$dummyIntro.getAttribute("data-scroll-event-progress"), this.outroProgressEvent = this.$dummyOutro.getAttribute("data-scroll-event-progress"), this.items = Array.from(this.$sliderItems).map((e, t) => {
+            const s = e;
+            return {
+                $root: s,
+                $el: s.children[0],
+                $dummy: this.$dummyItems[t],
+                dummyHeight: s.offsetWidth,
+                startProgressThreshold: 0,
+                startCurrentProgressThreshold: 0,
+                endProgressThreshold: 0
+            }
+        }), this.totalItemsHeight = this.getTotalItemsHeight(), this.totalSequenceHeight = this.getTotalSequenceHeight(), this.wHeight = window.innerHeight, this.wWidth = document.body.offsetWidth, this.sequenceProgress = 0, this.sequenceIntroProgress = 0, this.sequenceOutroProgress = 0
+    }
+    connectedCallback() {
+        this.unbindTouchOrSmallListener = u(g, ["isTouchOrSmall"], this.onTouchOrSmallStatusChange)
+    }
+    disconnectedCallback() {
+        this.unbindTouchOrSmallListener?.(), this.unbindEvents()
+    }
+    bindEvents() {
+        this.unbindScreenListener = m.subscribe(this.onResize), this.mainProgressEvent && window.addEventListener(this.mainProgressEvent, this.onScrollSequenceProgress), this.introProgressEvent && window.addEventListener(this.introProgressEvent, this.onScrollIntroProgress), this.outroProgressEvent && window.addEventListener(this.outroProgressEvent, this.onScrollOutroProgress)
+    }
+    unbindEvents() {
+        this.unbindScreenListener?.(), this.mainProgressEvent && window.removeEventListener(this.mainProgressEvent, this.onScrollSequenceProgress), this.introProgressEvent && window.removeEventListener(this.introProgressEvent, this.onScrollIntroProgress), this.outroProgressEvent && window.removeEventListener(this.outroProgressEvent, this.onScrollOutroProgress)
+    }
+    onResize({
+        height: e
+    }) {
+        this.wHeight = e, this.wWidth = document.body.offsetWidth, this.totalItemsHeight = this.getTotalItemsHeight(), this.totalSequenceHeight = this.getTotalSequenceHeight(), this.setMetrics(), this.applyHeight(), requestAnimationFrame(() => {
+            this.translateSlider(), this.setScrollProgressesChange()
+        })
+    }
+    onScrollSequenceProgress(e) {
+        const {
+            progress: t
+        } = e.detail;
+        this.sequenceProgress = t, this.translateSlider(), this.setScrollProgressesChange()
+    }
+    onScrollIntroProgress(e) {
+        const {
+            progress: t
+        } = e.detail;
+        this.sequenceIntroProgress = t
+    }
+    onScrollOutroProgress(e) {
+        const {
+            progress: t
+        } = e.detail;
+        this.sequenceOutroProgress = t
+    }
+    onTouchOrSmallStatusChange(e) {
+        e.isTouchOrSmall ? (this.unbindEvents(), this.reset()) : this.bindEvents()
+    }
+    setMetrics() {
+        let e = 0;
+        this.items = this.items.map(({
+            $root: t
+        }, s) => {
+            const i = {
+                ...this.items[s],
+                dummyHeight: t.offsetWidth
+            };
+            return s === 0 ? (e += this.wHeight, i.startProgressThreshold = 0, i.startCurrentProgressThreshold = e / this.totalSequenceHeight) : (i.startProgressThreshold = (e - this.wWidth) / this.totalSequenceHeight, i.startCurrentProgressThreshold = (e - this.wWidth) / this.totalSequenceHeight), i.endProgressThreshold = (e + i.dummyHeight) / this.totalSequenceHeight, e += i.dummyHeight, i
+        })
+    }
+    getTotalItemsHeight() {
+        return this.items.reduce((e, {
+            $root: t
+        }) => e + t.offsetWidth, 0)
+    }
+    applyHeight() {
+        this.items.forEach(({
+            $dummy: e,
+            $root: t
+        }) => {
+            e.style.setProperty("--dummy-height", `${t.offsetWidth}px`)
+        }), requestAnimationFrame(() => {
+            T.get()?.resize()
+        })
+    }
+    getTotalSequenceHeight() {
+        return this.totalItemsHeight + this.wHeight
+    }
+    translateSlider() {
+        const e = 1 - this.totalItemsHeight / this.totalSequenceHeight,
+            t = l(0, this.totalItemsHeight, h(e, 1, 0, this.totalItemsHeight, this.sequenceProgress)) || 0;
+        this.$slider.style.transform = `translate3d(-${t}px,0,0)`
+    }
+    setScrollProgressesChange() {
+        this.items.forEach(({
+            startProgressThreshold: e,
+            startCurrentProgressThreshold: t,
+            endProgressThreshold: s,
+            $el: i
+        }) => {
+            const a = l(0, 1, h(e, s, 0, 1, this.sequenceProgress)),
+                c = l(0, 1, h(t, s, 0, 1, this.sequenceProgress));
+            i.onScrollProgressesChange({
+                sequenceIntroProgress: this.sequenceIntroProgress,
+                sequenceOutroProgress: this.sequenceOutroProgress,
+                currentProgress: c,
+                progress: a
+            })
+        })
+    }
+    reset() {
+        this.$slider.style.transform = "", this.items.forEach(({
+            $el: e
+        }) => {
+            e?.reset?.()
+        })
+    }
+}
+customElements.define("c-horizontal", S);
+class d extends HTMLElement {
+    static FIRST_TRANSLATE_VALUE = 1.2;
+    static LAST_TRANSLATE_VALUE = 1.75;
+    static DEGREE_INCREMENT_VALUE = 1;
+    unbindScreenListener = () => {};
+    $words;
+    $rotatedIcon;
+    wordsTimelines;
+    progress;
+    rotationTimeline = r.timeline({
+        paused: !0
+    });
+    $underlines;
+    constructor() {
+        super(), this.onResize = this.onResize.bind(this), this.$words = this.querySelectorAll("[data-translated-word]"), this.$rotatedIcon = this.querySelector("[data-rotate-icon]"), this.$underlines = Array.from(this.querySelectorAll("[data-underline]")), this.wordsTimelines = [], this.progress = 0
+    }
+    connectedCallback() {
+        this.bindEvents(), this.setWordsTimelines(), this.setRotationTimeline()
+    }
+    disconnectedCallback() {
+        this.unbindEvents()
+    }
+    bindEvents() {
+        this.unbindScreenListener = m.subscribe(this.onResize)
+    }
+    unbindEvents() {
+        this.unbindScreenListener?.()
+    }
+    onScrollProgressesChange({
+        progress: e,
+        sequenceIntroProgress: t
+    }) {
+        this.progress != e && (this.playRotationTimeline(e), this.playWordsTimelines(e), this.progress = e, this.classList.toggle("is-active", t > .8))
+    }
+    onResize() {
+        this.setUnderlinesDashProperty()
+    }
+    setWordsTimelines() {
+        this.$words.forEach((e, t) => {
+            const s = t % 2 ? d.LAST_TRANSLATE_VALUE : d.FIRST_TRANSLATE_VALUE,
+                i = t * .2,
+                a = r.timeline({
+                    paused: !0
+                });
+            a.to(e, {
+                duration: 1,
+                x: `${s}em`,
+                ease: "power2.out",
+                delay: i
+            }), this.wordsTimelines.push(a)
+        })
+    }
+    setRotationTimeline() {
+        this.rotationTimeline.to(this.$rotatedIcon, {
+            duration: 1,
+            rotation: 180 * 2,
+            ease: "linear"
+        })
+    }
+    setUnderlinesDashProperty() {
+        window.requestAnimationFrame(() => {
+            this.$underlines.forEach(e => {
+                const t = e.querySelector("path");
+                if (!t) return;
+                const s = t.getBoundingClientRect(),
+                    i = t.getBBox();
+                if (i.width === 0 || s.width === 0) return;
+                const a = s.width / i.width,
+                    c = t.getTotalLength() * a;
+                e.style.setProperty("--path-length", isNaN(c) ? "0" : `${c}`)
+            })
+        })
+    }
+    playWordsTimelines(e) {
+        this.wordsTimelines.forEach(t => {
+            t.progress(e)
+        })
+    }
+    playRotationTimeline(e) {
+        this.rotationTimeline.progress(e)
+    }
+    reset() {
+        this.wordsTimelines.forEach((e, t) => {
+            e.kill(), r.set(this.$words[t], {
+                clearProps: "all"
+            })
+        }), this.rotationTimeline.kill(), r.set(this.$rotatedIcon, {
+            clearProps: "all"
+        })
+    }
+}
+customElements.define("c-horizontal-hero", d);
+const P = {
+    FIXED_PROGRESS: "FixedProgress"
+};
+class n extends HTMLElement {
+    static PARALLAX_TRANSLATE_RATIO = .25;
+    static PARALLAX_TRANSLATE_RANGE_MIN = 200;
+    static PARALLAX_RANDOM_RANGE = [.9, 1.1];
+    static CONTAINER_PADDING = 40;
+    static CONTAINER_NEGATIVE_OFFSET = 140;
+    unbindScreenListener = () => {};
+    unbindTouchOrSmallListener = () => {};
+    $parallaxItems;
+    parallaxTimelines;
+    wHeight;
+    parallaxTranslateRange;
+    progress;
+    $parallaxImages;
+    $parallaxRandomSpeeds;
+    $container;
+    containerNegativeOffset;
+    containerParallaxTimeline;
+    fixedProgressRange = [0, 0];
+    uid;
+    $slotChildren;
+    $rotatedIcon;
+    rotationTimeline = r.timeline({
+        paused: !0
+    });
+    constructor() {
+        super(), this.onResize = this.onResize.bind(this), this.onTouchOrSmallStatusChange = this.onTouchOrSmallStatusChange.bind(this), this.$parallaxItems = this.querySelectorAll("[data-gallery-parallax]"), this.$parallaxImages = Array.from(this.$parallaxItems).map(e => e.querySelector("[data-image]")).filter(e => e !== null), this.$parallaxRandomSpeeds = this.$parallaxImages.map(() => r.utils.random(n.PARALLAX_RANDOM_RANGE[0], n.PARALLAX_RANDOM_RANGE[1])), this.$container = this.querySelector("[data-container]"), this.$rotatedIcon = this.querySelector("[data-rotate-icon]"), this.uid = this.dataset.uid, this.parallaxTimelines = [], this.containerParallaxTimeline = r.timeline({
+            paused: !0
+        }), this.wHeight = window.innerHeight, this.parallaxTranslateRange = Math.max(n.PARALLAX_TRANSLATE_RANGE_MIN, this.wHeight * n.PARALLAX_TRANSLATE_RATIO), this.progress = 0, this.containerNegativeOffset = (this.offsetWidth - this.$container.offsetWidth + n.CONTAINER_PADDING + n.CONTAINER_NEGATIVE_OFFSET) * -1, this.$slotChildren = Array.from(this.querySelector("[data-slot]").children)
+    }
+    connectedCallback() {
+        this.unbindTouchOrSmallListener = u(g, ["isTouchOrSmall"], this.onTouchOrSmallStatusChange), this.$rotatedIcon && this.setRotationTimeline()
+    }
+    disconnectedCallback() {
+        this.unbindTouchOrSmallListener?.(), this.unbindEvents(), this.$slotChildren.forEach(e => {
+            e.remove()
+        })
+    }
+    bindEvents() {
+        this.unbindScreenListener = m.subscribe(this.onResize)
+    }
+    unbindEvents() {
+        this.unbindScreenListener?.()
+    }
+    onScrollProgressesChange({
+        progress: e
+    }) {
+        if (this.progress != e) {
+            this.playParallaxTimelines(e), this.playContainerParallaxTimeline(e), this.$rotatedIcon && this.playRotationTimeline(e), this.progress = e;
+            const t = l(0, 1, h(this.fixedProgressRange[0], this.fixedProgressRange[1], 0, 1, e)),
+                s = new CustomEvent(`${this.uid}${P.FIXED_PROGRESS}`, {
+                    detail: {
+                        progress: t
+                    }
+                });
+            window.dispatchEvent(s)
+        }
+    }
+    onResize({
+        width: e,
+        height: t
+    }) {
+        requestAnimationFrame(() => {
+            this.wHeight = t, this.parallaxTranslateRange = Math.max(n.PARALLAX_TRANSLATE_RANGE_MIN, this.wHeight * n.PARALLAX_TRANSLATE_RATIO), this.containerNegativeOffset = (this.offsetWidth - this.$container.offsetWidth + n.CONTAINER_PADDING + n.CONTAINER_NEGATIVE_OFFSET) * -1, this.setParallaxTimelines(), this.setContainerParallaxTimeline();
+            const s = e / 2,
+                i = this.$container.offsetWidth + e * 2;
+            this.fixedProgressRange = [(s - this.containerNegativeOffset) / i, (i - s + this.containerNegativeOffset) / i]
+        })
+    }
+    onTouchOrSmallStatusChange(e) {
+        e.isTouchOrSmall ? (this.unbindEvents(), this.reset()) : this.bindEvents()
+    }
+    setParallaxTimelines() {
+        this.parallaxTimelines.length && (this.parallaxTimelines.forEach(e => e.kill()), this.parallaxTimelines = []), requestAnimationFrame(() => {
+            this.$parallaxImages.forEach((e, t) => {
+                const s = r.timeline({
+                    paused: !0
+                });
+                s.set(e, {
+                    x: this.parallaxTranslateRange / 2 * this.$parallaxRandomSpeeds[t] * -1
+                }), requestAnimationFrame(() => {
+                    s.to(e, {
+                        x: this.parallaxTranslateRange / 2 * this.$parallaxRandomSpeeds[t],
+                        duration: 1,
+                        ease: "linear"
+                    }), this.progress > 0 ? s.progress(this.progress) : s.progress(1e-4), this.parallaxTimelines.push(s)
+                })
+            })
+        })
+    }
+    setContainerParallaxTimeline() {
+        this.containerParallaxTimeline?.kill(), this.containerParallaxTimeline = r.timeline({
+            paused: !0
+        }), this.containerParallaxTimeline.set(this.$container, {
+            x: this.containerNegativeOffset
+        }), requestAnimationFrame(() => {
+            this.containerParallaxTimeline.to(this.$container, {
+                x: 0,
+                duration: 1,
+                ease: "linear"
+            }), this.progress > 0 ? this.containerParallaxTimeline.progress(this.progress) : this.containerParallaxTimeline.progress(1e-4)
+        })
+    }
+    setRotationTimeline() {
+        this.rotationTimeline.to(this.$rotatedIcon, {
+            duration: 1,
+            rotation: 360 * -.6,
+            ease: "linear"
+        })
+    }
+    playParallaxTimelines(e) {
+        this.parallaxTimelines.forEach(t => {
+            t.progress(e)
+        })
+    }
+    playContainerParallaxTimeline(e) {
+        this.containerParallaxTimeline.progress(e)
+    }
+    playRotationTimeline(e) {
+        this.rotationTimeline.progress(e)
+    }
+    reset() {
+        this.parallaxTimelines.forEach((e, t) => {
+            e.kill(), r.set(this.$parallaxImages[t], {
+                clearProps: "all"
+            })
+        }), this.containerParallaxTimeline.kill(), r.set(this.$container, {
+            clearProps: "all"
+        }), this.rotationTimeline.kill(), r.set(this.$rotatedIcon, {
+            clearProps: "all"
+        })
+    }
+}
+customElements.define("c-horizontal-gallery", n);
+class o extends HTMLElement {
+    static THRESHOLD = .1;
+    static VISIBLE_CLASS = "is-visible";
+    isVisible = !1;
+    progress = 0;
+    $rotatedIcon;
+    rotationTimeline = r.timeline({
+        paused: !0
+    });
+    constructor() {
+        super(), this.$rotatedIcon = this.querySelector("[data-rotate-icon]")
+    }
+    connectedCallback() {
+        this.bindEvents(), this.setRotationTimeline()
+    }
+    disconnectedCallback() {
+        this.unbindEvents()
+    }
+    bindEvents() {}
+    unbindEvents() {}
+    onScrollProgressesChange({
+        progress: e
+    }) {
+        this.progress != e && (this.setVisibility(), this.playRotationTimeline(e), this.progress = e)
+    }
+    setVisibility() {
+        this.progress >= o.THRESHOLD && this.progress <= 1 - o.THRESHOLD && !this.isVisible ? (this.isVisible = !0, this.classList.add(o.VISIBLE_CLASS)) : (this.progress < o.THRESHOLD || this.progress > 1 - o.THRESHOLD) && this.isVisible && (this.isVisible = !1, this.classList.remove(o.VISIBLE_CLASS))
+    }
+    setRotationTimeline() {
+        this.rotationTimeline.to(this.$rotatedIcon, {
+            duration: 1,
+            rotation: 360 * .3,
+            ease: "linear"
+        })
+    }
+    playRotationTimeline(e) {
+        this.rotationTimeline.progress(e)
+    }
+    reset() {
+        this.isVisible = !1, this.classList.remove(o.VISIBLE_CLASS), this.rotationTimeline.kill(), r.set(this.$rotatedIcon, {
+            clearProps: "all"
+        })
+    }
+}
+customElements.define("c-horizontal-text", o);
+class E extends HTMLElement {
+    unbindScreenListener = () => {};
+    unbindTouchOrSmallListener = () => {};
+    $root;
+    $backgroundImage;
+    $clippedImage;
+    mainProgressEvent;
+    wWidth;
+    wHeight;
+    totalHeight;
+    progress = 0;
+    sequenceProgresses;
+    clipPathData;
+    imageRatioData;
+    clippedImageData;
+    $clipRef;
+    fromClip = {
+        x: 0,
+        y: 0
+    };
+    fromScale = 0;
+    clipTimeline = r.timeline({
+        paused: !0
+    });
+    scaleTimeline = r.timeline({
+        paused: !0
+    });
+    scaleBackgroundTimeline = r.timeline({
+        paused: !0
+    });
+    constructor() {
+        super(), this.onResize = this.onResize.bind(this), this.onScrollProgress = this.onScrollProgress.bind(this), this.onTouchOrSmallStatusChange = this.onTouchOrSmallStatusChange.bind(this), this.$root = this.querySelector("[data-horizontal-root]"), this.$backgroundImage = this.querySelector("[data-background-image]"), this.$clippedImage = this.querySelector("[data-clipped-image]"), this.$clipRef = this.querySelector("[data-clipped-image-ref]"), this.mainProgressEvent = this.$root.getAttribute("data-scroll-event-progress"), this.wHeight = window.innerHeight, this.wWidth = document.body.offsetWidth, this.totalHeight = this.$root.offsetHeight, this.sequenceProgresses = {
+            entering: {
+                startThreshold: 0,
+                endThreshold: 0,
+                value: 0
+            },
+            current: {
+                startThreshold: 0,
+                endThreshold: 1,
+                value: 0
+            }
+        }, this.clipPathData = JSON.parse(this.$clippedImage.getAttribute("data-clip-data") ?? JSON.stringify({
+            width: 100,
+            height: 100
+        })), this.imageRatioData = JSON.parse(this.$clippedImage.getAttribute("data-image-ratio-data") ?? JSON.stringify({
+            width: 100,
+            height: 100
+        })), this.clippedImageData = {
+            width: 0,
+            height: 0
+        }
+    }
+    connectedCallback() {
+        this.unbindTouchOrSmallListener = u(g, ["isTouchOrSmall"], this.onTouchOrSmallStatusChange)
+    }
+    disconnectedCallback() {
+        this.unbindTouchOrSmallListener?.(), this.unbindEvents()
+    }
+    bindEvents() {
+        this.unbindScreenListener = m.subscribe(this.onResize), this.mainProgressEvent && window.addEventListener(this.mainProgressEvent, this.onScrollProgress)
+    }
+    unbindEvents() {
+        this.unbindScreenListener?.(), this.mainProgressEvent && window.removeEventListener(this.mainProgressEvent, this.onScrollProgress)
+    }
+    onResize({
+        height: e
+    }) {
+        this.wHeight = e, this.wWidth = document.body.offsetWidth, this.totalHeight = this.$root.offsetHeight - this.wHeight, this.computeProgressesMetrics(), this.computeAllProgress(), this.applyCoverStyle(), this.setFromValues(), this.setClipTimeline(), this.setScaleTimeline(), this.setScaleBackgroundTimeline()
+    }
+    onScrollProgress(e) {
+        const {
+            progress: t
+        } = e.detail;
+        this.progress = t, this.computeAllProgress()
+    }
+    onTouchOrSmallStatusChange(e) {
+        e.isTouchOrSmall ? (this.unbindEvents(), this.reset()) : (this.resetTouchOrSmall(), this.bindEvents())
+    }
+    computeProgressesMetrics() {
+        Object.keys(this.sequenceProgresses).forEach(e => {
+            const t = this.sequenceProgresses[e];
+            switch (e) {
+                case "entering":
+                    t.startThreshold = 0, t.endThreshold = this.wWidth / this.totalHeight;
+                    break;
+                case "current":
+                    t.startThreshold = this.wWidth / this.totalHeight, t.endThreshold = 1;
+                    break
+            }
+        })
+    }
+    computeAllProgress() {
+        Object.keys(this.sequenceProgresses).forEach(e => {
+            const t = this.sequenceProgresses[e],
+                {
+                    startThreshold: s,
+                    endThreshold: i
+                } = t,
+                a = l(0, 1, h(s, i, 0, 1, this.progress));
+            t.value = a
+        }), this.playClipTimeline(this.progress), this.playScaleTimeline(this.progress), this.playScaleBackgroundTimeline(this.progress)
+    }
+    applyCoverStyle() {
+        const e = this.wWidth / this.wHeight,
+            t = this.imageRatioData.width,
+            s = this.imageRatioData.height,
+            i = t / s;
+        i > e || (this.clippedImageData.width = this.wWidth, this.clippedImageData.height = this.wWidth / i, this.$clippedImage.style.width = `${this.clippedImageData.width}px`, this.$clippedImage.style.height = `${this.clippedImageData.height}px`)
+    }
+    setFromValues() {
+        const e = (1 - this.clipPathData.width / this.imageRatioData.width) / 2,
+            t = (1 - this.clipPathData.height / this.imageRatioData.height) / 2,
+            s = this.clippedImageData.width * e * 2,
+            a = this.$clipRef.offsetWidth / (this.clippedImageData.width - s);
+        this.fromClip = {
+            x: this.clippedImageData.width * e,
+            y: this.clippedImageData.height * t
+        }, this.fromScale = a
+    }
+    setClipTimeline() {
+        this.clipTimeline?.kill(), this.clipTimeline = r.timeline({
+            paused: !0
+        }), this.clipTimeline.set(this.$clippedImage, {
+            clipPath: `inset(${this.fromClip.y}px ${this.fromClip.x}px round 24px)`
+        }), requestAnimationFrame(() => {
+            this.clipTimeline.to(this.$clippedImage, {
+                clipPath: "inset(0px 0px round 0px)",
+                duration: 1,
+                ease: "power4.in"
+            })
+        })
+    }
+    setScaleTimeline() {
+        this.scaleTimeline?.kill(), this.scaleTimeline = r.timeline({
+            paused: !0
+        }), this.scaleTimeline.set(this.$clippedImage, {
+            scale: this.fromScale
+        }), requestAnimationFrame(() => {
+            this.scaleTimeline.to(this.$clippedImage, {
+                scale: 1,
+                duration: 1,
+                ease: "power4.in"
+            })
+        })
+    }
+    setScaleBackgroundTimeline() {
+        this.scaleBackgroundTimeline?.kill(), this.scaleBackgroundTimeline = r.timeline({
+            paused: !0
+        }), this.scaleBackgroundTimeline.to(this.$backgroundImage, {
+            scale: 1.2,
+            duration: 1,
+            ease: "linear"
+        })
+    }
+    playClipTimeline(e) {
+        this.clipTimeline.progress(e)
+    }
+    playScaleTimeline(e) {
+        this.scaleTimeline.progress(e)
+    }
+    playScaleBackgroundTimeline(e) {
+        this.scaleBackgroundTimeline.progress(e)
+    }
+    reset() {
+        this.clipTimeline.kill(), this.scaleTimeline.kill(), this.scaleBackgroundTimeline.kill(), r.set(this.$clippedImage, {
+            clearProps: "all"
+        }), r.set(this.$backgroundImage, {
+            clearProps: "all"
+        })
+    }
+    resetTouchOrSmall() {
+        r.set(this.$clippedImage, {
+            clearProps: "all"
+        })
+    }
+}
+customElements.define("c-horizontal-outro", E);
+export {
+    P as H
+};

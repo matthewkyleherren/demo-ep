@@ -1,1 +1,51 @@
-import{j as e}from"./jsx-runtime.DAW3kIbQ.js";import{r as u}from"./index.l3JPYhe8.js";import"./_commonjsHelpers.Cpj98o6Y.js";const c=()=>{const[t,a]=u.useState(!1),[s,r]=u.useState(null),n=()=>{a(!1)},l=o=>{o?.detail&&(a(o.detail?.open),r(o.detail))};return u.useEffect(()=>(t?document.body.classList.add("c-modal-open"):document.body.classList.remove("c-modal-open"),()=>{document.body.classList.remove("c-modal-open")}),[t]),u.useEffect(()=>(document.addEventListener("error-modal-event",l),()=>{document.removeEventListener("error-modal-event",l)}),[]),e.jsxs("div",{className:"u-relative u-z-highest print:u-hidden","data-lenis-prevent":!0,children:[e.jsx("div",{className:`!u-bg-black/50 u-transition-all u-duration-300 before:u-fixed before:u-inset-0 before:u-h-full before:u-bg-black/75 before:u-transition-all before:u-duration-300 ${t?"!u-visible u-opacity-100":"u-invisible u-opacity-0"}`}),e.jsxs("div",{className:`u-fixed u-z-highest u-mx-auto u-w-full u-rounded-lg u-bg-white u-px-4 u-pb-14 u-pt-[18px] u-transition-all u-delay-100 u-duration-300 sm:u-left-1/2 sm:u-top-1/2 sm:u-max-w-[420px] sm:-u-translate-x-1/2 sm:-u-translate-y-1/2 sm:u-pb-4 sm:u-pt-2.5 to-sm:!u-rounded-b-none ${t?"!u-visible u-scale-100 u-opacity-100 to-sm:u-bottom-0":"u-invisible u-opacity-0 sm:u-scale-90 to-sm:-u-bottom-full"}`,children:[e.jsx("h2",{className:"c-h3 to-sm:u-mb-2",children:s?.title}),e.jsx("p",{className:"c-body-med u-mb-2.5 u-mt-1 u-block",children:s?.message}),s?.description&&e.jsx("div",{dangerouslySetInnerHTML:{__html:s?.description},className:"c-body-reg u-mb-[18px] u-break-words sm:u-pr-10 [&_a]:u-font-medium [&_a]:u-underline"}),e.jsx("div",{className:"u-flex u-justify-end u-text-right",children:e.jsx("button",{type:"button",className:"c-grey-large-button",onClick:()=>n(),children:"close"})})]})]})};export{c as default};
+import {
+    j as e
+} from "./jsx-runtime.DAW3kIbQ.js";
+import {
+    r as u
+} from "./index.l3JPYhe8.js";
+import "./_commonjsHelpers.Cpj98o6Y.js";
+const c = () => {
+    const [t, a] = u.useState(!1), [s, r] = u.useState(null), n = () => {
+        a(!1)
+    }, l = o => {
+        o?.detail && (a(o.detail?.open), r(o.detail))
+    };
+    return u.useEffect(() => (t ? document.body.classList.add("c-modal-open") : document.body.classList.remove("c-modal-open"), () => {
+        document.body.classList.remove("c-modal-open")
+    }), [t]), u.useEffect(() => (document.addEventListener("error-modal-event", l), () => {
+        document.removeEventListener("error-modal-event", l)
+    }), []), e.jsxs("div", {
+        className: "u-relative u-z-highest print:u-hidden",
+        "data-lenis-prevent": !0,
+        children: [e.jsx("div", {
+            className: `!u-bg-black/50 u-transition-all u-duration-300 before:u-fixed before:u-inset-0 before:u-h-full before:u-bg-black/75 before:u-transition-all before:u-duration-300 ${t?"!u-visible u-opacity-100":"u-invisible u-opacity-0"}`
+        }), e.jsxs("div", {
+            className: `u-fixed u-z-highest u-mx-auto u-w-full u-rounded-lg u-bg-white u-px-4 u-pb-14 u-pt-[18px] u-transition-all u-delay-100 u-duration-300 sm:u-left-1/2 sm:u-top-1/2 sm:u-max-w-[420px] sm:-u-translate-x-1/2 sm:-u-translate-y-1/2 sm:u-pb-4 sm:u-pt-2.5 to-sm:!u-rounded-b-none ${t?"!u-visible u-scale-100 u-opacity-100 to-sm:u-bottom-0":"u-invisible u-opacity-0 sm:u-scale-90 to-sm:-u-bottom-full"}`,
+            children: [e.jsx("h2", {
+                className: "c-h3 to-sm:u-mb-2",
+                children: s?.title
+            }), e.jsx("p", {
+                className: "c-body-med u-mb-2.5 u-mt-1 u-block",
+                children: s?.message
+            }), s?.description && e.jsx("div", {
+                dangerouslySetInnerHTML: {
+                    __html: s?.description
+                },
+                className: "c-body-reg u-mb-[18px] u-break-words sm:u-pr-10 [&_a]:u-font-medium [&_a]:u-underline"
+            }), e.jsx("div", {
+                className: "u-flex u-justify-end u-text-right",
+                children: e.jsx("button", {
+                    type: "button",
+                    className: "c-grey-large-button",
+                    onClick: () => n(),
+                    children: "close"
+                })
+            })]
+        })]
+    })
+};
+export {
+    c as
+    default
+};

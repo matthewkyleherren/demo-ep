@@ -1,1 +1,93 @@
-import{a}from"./index.BSdFiPHn.js";const w=5,o=6,u=10;let L=(e,s,n,d)=>(e.events=e.events||{},e.events[n+u]||(e.events[n+u]=d(t=>{e.events[n].reduceRight((i,r)=>(r(i),i),{shared:{},...t})})),e.events[n]=e.events[n]||[],e.events[n].push(s),()=>{let t=e.events[n],i=t.indexOf(s);t.splice(i,1),t.length||(delete e.events[n],e.events[n+u](),delete e.events[n+u])}),p=1e3,h=(e,s)=>L(e,d=>{let t=s(d);t&&e.events[o].push(t)},w,d=>{let t=e.listen;e.listen=(...r)=>(!e.lc&&!e.active&&(e.active=!0,d()),t(...r));let i=e.off;return e.events[o]=[],e.off=()=>{i(),setTimeout(()=>{if(e.active&&!e.lc){e.active=!1;for(let r of e.events[o])r();e.events[o]=[]}},p)},()=>{e.listen=t,e.off=i}}),g=e=>e,f={},c={addEventListener(){},removeEventListener(){}};function O(){try{return typeof localStorage<"u"}catch{return!1}}O()&&(f=localStorage);let N={addEventListener(e,s,n){window.addEventListener("storage",s),window.addEventListener("pageshow",n)},removeEventListener(e,s,n){window.removeEventListener("storage",s),window.removeEventListener("pageshow",n)}};typeof window<"u"&&(c=N);function T(e,s=void 0,n={}){let d=n.encode||g,t=n.decode||g,i=a(s),r=i.set;i.set=l=>{typeof l>"u"?delete f[e]:f[e]=d(l),r(l)};function E(l){l.key===e?l.newValue===null?r(void 0):r(t(l.newValue)):f[e]||r(void 0)}function v(){i.set(f[e]?t(f[e]):s)}return h(i,()=>{if(v(),n.listen!==!1)return c.addEventListener(e,E,v),()=>{c.removeEventListener(e,E,v)}}),i}const U=T("user",null,{encode:JSON.stringify,decode:JSON.parse}),M=a(!1),A=a(!1),R=a(null);export{M as $,U as a,A as b,R as c};
+import {
+    a
+} from "./index.BSdFiPHn.js";
+const w = 5,
+    o = 6,
+    u = 10;
+let L = (e, s, n, d) => (e.events = e.events || {}, e.events[n + u] || (e.events[n + u] = d(t => {
+        e.events[n].reduceRight((i, r) => (r(i), i), {
+            shared: {},
+            ...t
+        })
+    })), e.events[n] = e.events[n] || [], e.events[n].push(s), () => {
+        let t = e.events[n],
+            i = t.indexOf(s);
+        t.splice(i, 1), t.length || (delete e.events[n], e.events[n + u](), delete e.events[n + u])
+    }),
+    p = 1e3,
+    h = (e, s) => L(e, d => {
+        let t = s(d);
+        t && e.events[o].push(t)
+    }, w, d => {
+        let t = e.listen;
+        e.listen = (...r) => (!e.lc && !e.active && (e.active = !0, d()), t(...r));
+        let i = e.off;
+        return e.events[o] = [], e.off = () => {
+            i(), setTimeout(() => {
+                if (e.active && !e.lc) {
+                    e.active = !1;
+                    for (let r of e.events[o]) r();
+                    e.events[o] = []
+                }
+            }, p)
+        }, () => {
+            e.listen = t, e.off = i
+        }
+    }),
+    g = e => e,
+    f = {},
+    c = {
+        addEventListener() {},
+        removeEventListener() {}
+    };
+
+function O() {
+    try {
+        return typeof localStorage < "u"
+    } catch {
+        return !1
+    }
+}
+O() && (f = localStorage);
+let N = {
+    addEventListener(e, s, n) {
+        window.addEventListener("storage", s), window.addEventListener("pageshow", n)
+    },
+    removeEventListener(e, s, n) {
+        window.removeEventListener("storage", s), window.removeEventListener("pageshow", n)
+    }
+};
+typeof window < "u" && (c = N);
+
+function T(e, s = void 0, n = {}) {
+    let d = n.encode || g,
+        t = n.decode || g,
+        i = a(s),
+        r = i.set;
+    i.set = l => {
+        typeof l > "u" ? delete f[e] : f[e] = d(l), r(l)
+    };
+
+    function E(l) {
+        l.key === e ? l.newValue === null ? r(void 0) : r(t(l.newValue)) : f[e] || r(void 0)
+    }
+
+    function v() {
+        i.set(f[e] ? t(f[e]) : s)
+    }
+    return h(i, () => {
+        if (v(), n.listen !== !1) return c.addEventListener(e, E, v), () => {
+            c.removeEventListener(e, E, v)
+        }
+    }), i
+}
+const U = T("user", null, {
+        encode: JSON.stringify,
+        decode: JSON.parse
+    }),
+    M = a(!1),
+    A = a(!1),
+    R = a(null);
+export {
+    M as $, U as a, A as b, R as c
+};

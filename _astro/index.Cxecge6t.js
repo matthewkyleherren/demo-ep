@@ -1,1 +1,404 @@
-var an={},En=n=>{if(Object.prototype.toString.call(n)!=="[object Object]")return!1;const _=Object.getPrototypeOf(n);return _===null||_===Object.prototype};(function(n){var _=En;n.BLOCKS=void 0,function(t){t.DOCUMENT="document",t.PARAGRAPH="paragraph",t.HEADING_1="heading-1",t.HEADING_2="heading-2",t.HEADING_3="heading-3",t.HEADING_4="heading-4",t.HEADING_5="heading-5",t.HEADING_6="heading-6",t.OL_LIST="ordered-list",t.UL_LIST="unordered-list",t.LIST_ITEM="list-item",t.HR="hr",t.QUOTE="blockquote",t.EMBEDDED_ENTRY="embedded-entry-block",t.EMBEDDED_ASSET="embedded-asset-block",t.EMBEDDED_RESOURCE="embedded-resource-block",t.TABLE="table",t.TABLE_ROW="table-row",t.TABLE_CELL="table-cell",t.TABLE_HEADER_CELL="table-header-cell"}(n.BLOCKS||(n.BLOCKS={})),n.INLINES=void 0,function(t){t.ASSET_HYPERLINK="asset-hyperlink",t.EMBEDDED_ENTRY="embedded-entry-inline",t.EMBEDDED_RESOURCE="embedded-resource-inline",t.ENTRY_HYPERLINK="entry-hyperlink",t.HYPERLINK="hyperlink",t.RESOURCE_HYPERLINK="resource-hyperlink"}(n.INLINES||(n.INLINES={})),n.MARKS=void 0,function(t){t.BOLD="bold",t.ITALIC="italic",t.UNDERLINE="underline",t.CODE="code",t.SUPERSCRIPT="superscript",t.SUBSCRIPT="subscript",t.STRIKETHROUGH="strikethrough"}(n.MARKS||(n.MARKS={}));var d=function(t,i){return d=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(a,r){a.__proto__=r}||function(a,r){for(var e in r)Object.prototype.hasOwnProperty.call(r,e)&&(a[e]=r[e])},d(t,i)};function s(t,i){if(typeof i!="function"&&i!==null)throw new TypeError("Class extends value "+String(i)+" is not a constructor or null");d(t,i);function a(){this.constructor=t}t.prototype=i===null?Object.create(i):(a.prototype=i.prototype,new a)}function O(t,i,a){if(a||arguments.length===2)for(var r=0,e=i.length,E;r<e;r++)(E||!(r in i))&&(E||(E=Array.prototype.slice.call(i,0,r)),E[r]=i[r]);return t.concat(E||Array.prototype.slice.call(i))}typeof SuppressedError=="function"&&SuppressedError;var l,K=[n.BLOCKS.PARAGRAPH,n.BLOCKS.HEADING_1,n.BLOCKS.HEADING_2,n.BLOCKS.HEADING_3,n.BLOCKS.HEADING_4,n.BLOCKS.HEADING_5,n.BLOCKS.HEADING_6,n.BLOCKS.OL_LIST,n.BLOCKS.UL_LIST,n.BLOCKS.HR,n.BLOCKS.QUOTE,n.BLOCKS.EMBEDDED_ENTRY,n.BLOCKS.EMBEDDED_ASSET,n.BLOCKS.EMBEDDED_RESOURCE,n.BLOCKS.TABLE],I=[n.BLOCKS.PARAGRAPH,n.BLOCKS.HEADING_1,n.BLOCKS.HEADING_2,n.BLOCKS.HEADING_3,n.BLOCKS.HEADING_4,n.BLOCKS.HEADING_5,n.BLOCKS.HEADING_6,n.BLOCKS.OL_LIST,n.BLOCKS.UL_LIST,n.BLOCKS.HR,n.BLOCKS.QUOTE,n.BLOCKS.EMBEDDED_ENTRY,n.BLOCKS.EMBEDDED_ASSET,n.BLOCKS.EMBEDDED_RESOURCE],G=[n.BLOCKS.TABLE,n.BLOCKS.TABLE_ROW,n.BLOCKS.TABLE_CELL,n.BLOCKS.TABLE_HEADER_CELL],g=[n.BLOCKS.HR,n.BLOCKS.EMBEDDED_ENTRY,n.BLOCKS.EMBEDDED_ASSET,n.BLOCKS.EMBEDDED_RESOURCE],R=(l={},l[n.BLOCKS.OL_LIST]=[n.BLOCKS.LIST_ITEM],l[n.BLOCKS.UL_LIST]=[n.BLOCKS.LIST_ITEM],l[n.BLOCKS.LIST_ITEM]=I,l[n.BLOCKS.QUOTE]=[n.BLOCKS.PARAGRAPH],l[n.BLOCKS.TABLE]=[n.BLOCKS.TABLE_ROW],l[n.BLOCKS.TABLE_ROW]=[n.BLOCKS.TABLE_CELL,n.BLOCKS.TABLE_HEADER_CELL],l[n.BLOCKS.TABLE_CELL]=[n.BLOCKS.PARAGRAPH,n.BLOCKS.UL_LIST,n.BLOCKS.OL_LIST],l[n.BLOCKS.TABLE_HEADER_CELL]=[n.BLOCKS.PARAGRAPH],l),y=[n.BLOCKS.HEADING_1,n.BLOCKS.HEADING_2,n.BLOCKS.HEADING_3,n.BLOCKS.HEADING_4,n.BLOCKS.HEADING_5,n.BLOCKS.HEADING_6],M=O([n.BLOCKS.PARAGRAPH],y,!0),j=[n.BLOCKS.DOCUMENT,n.BLOCKS.PARAGRAPH,n.BLOCKS.HEADING_1,n.BLOCKS.HEADING_2,n.BLOCKS.HEADING_3,n.BLOCKS.HEADING_4,n.BLOCKS.HEADING_5,n.BLOCKS.HEADING_6,n.BLOCKS.OL_LIST,n.BLOCKS.UL_LIST,n.BLOCKS.LIST_ITEM,n.BLOCKS.HR,n.BLOCKS.QUOTE,n.BLOCKS.EMBEDDED_ENTRY,n.BLOCKS.EMBEDDED_ASSET,n.INLINES.HYPERLINK,n.INLINES.ENTRY_HYPERLINK,n.INLINES.ASSET_HYPERLINK,n.INLINES.EMBEDDED_ENTRY,"text"],U=[n.MARKS.BOLD,n.MARKS.CODE,n.MARKS.ITALIC,n.MARKS.UNDERLINE],w={nodeType:n.BLOCKS.DOCUMENT,data:{},content:[{nodeType:n.BLOCKS.PARAGRAPH,data:{},content:[{nodeType:"text",value:"",marks:[],data:{}}]}]};function H(t,i){for(var a=0,r=Object.keys(t);a<r.length;a++){var e=r[a];if(i===t[e])return!0}return!1}function Y(t){return H(n.INLINES,t.nodeType)}function V(t){return H(n.BLOCKS,t.nodeType)}function k(t){return t.nodeType==="text"}var z=Object.freeze({__proto__:null,isBlock:V,isInline:Y,isText:k}),C=function(t){var i=t.path,a=t.property,r=t.typeName,e=t.value;return{details:'The type of "'.concat(a,'" is incorrect, expected type: ').concat(r),name:"type",path:i.toArray(),type:r,value:e}},Q=function(t){var i=t.min,a=t.value,r=t.path;return{name:"size",min:i,path:r.toArray(),details:"Size must be at least ".concat(i),value:a}},W=function(t){var i=t.max,a=t.value,r=t.path;return{name:"size",max:i,path:r.toArray(),details:"Size must be at most ".concat(i),value:a}},q=function(t){var i=t.expected,a=t.value,r=t.path;return{details:"Value must be one of expected values",name:"in",expected:O([],i,!0).sort(),path:r.toArray(),value:a}},$=function(t){var i=t.property,a=t.path;return{details:'The property "'.concat(i,'" is not expected'),name:"unexpected",path:a.toArray()}},X=function(t){var i=t.property,a=t.path;return{details:'The property "'.concat(i,'" is required here'),name:"required",path:a.toArray()}},S=function(){function t(i,a){var r=this;this.obj=i,this.path=a,this._errors=[],this.catch=function(){for(var e,E=[],u=0;u<arguments.length;u++)E[u]=arguments[u];(e=r._errors).push.apply(e,E)},this.exists=function(e){return e in r.obj?!0:(r.catch(X({property:e,path:r.path.of(e)})),!1)},this.object=function(e){var E,u=e?r.obj[e]:r.obj;if(e&&!r.exists(e))return!1;if(_(u))return!0;var o=e?r.path.of(e):r.path,c=(E=e??r.path.last())!==null&&E!==void 0?E:"value";return r.catch(C({typeName:"Object",property:c,path:o,value:u})),!1},this.string=function(e){var E=r.obj[e];return e&&!r.exists(e)?!1:typeof E=="string"?!0:(r.catch(C({typeName:"String",property:e,path:r.path.of(e),value:E})),!1)},this.number=function(e,E){var u=r.obj[e];return E&&!(e in r.obj)?!0:r.exists(e)?typeof u=="number"&&!Number.isNaN(u)?!0:(r.catch(C({typeName:"Number",property:e,path:r.path.of(e),value:u})),!1):!1},this.array=function(e){var E=r.obj[e];return e&&!r.exists(e)?!1:Array.isArray(E)?!0:(r.catch(C({typeName:"Array",property:e,path:r.path.of(e),value:E})),!1)},this.enum=function(e,E){var u=r.obj[e];return typeof u=="string"&&E.includes(u)?!0:(r.catch(q({expected:E,value:u,path:r.path.of(e)})),!1)},this.empty=function(e){if(!r.array(e))return!1;var E=r.obj[e];return E.length===0?!0:(r.catch(W({max:0,value:E,path:r.path.of(e)})),!1)},this.minLength=function(e,E){if(!r.array(e))return!1;var u=r.obj[e];return u.length>=E?!0:(r.catch(Q({min:E,value:u,path:r.path.of(e)})),!1)},this.noAdditionalProperties=function(e){var E=Object.keys(r.obj).sort().filter(function(u){return!e.includes(u)});return E.forEach(function(u){return r.catch($({property:u,path:r.path.of(u)}))}),E.length===0},this.each=function(e,E){if(r.array(e)){var u=r.obj[e],o=!1;u.forEach(function(c,T){if(!o){var v=E(c,r.path.of(e).of(T));v.length>0&&(o=!0),r.catch.apply(r,v)}})}}}return Object.defineProperty(t.prototype,"errors",{get:function(){var i=this,a=function(r){return JSON.stringify({details:r.details,path:r.path})};return this._errors.filter(function(r,e){return i._errors.findIndex(function(E){return a(r)===a(E)})===e})},enumerable:!1,configurable:!0}),t}(),B=[],N=function(){function t(i,a){this.contentRule=i,this.validateData=a}return t.prototype.assert=function(i,a){var r,e,E=new S(i,a);if(!E.object())return E.errors;E.noAdditionalProperties(["nodeType","data","content"]);var u=Array.isArray(this.contentRule)?{nodeTypes:this.contentRule}:this.contentRule(i,a),o=u.nodeTypes,c=u.min,T=c===void 0?0:c;if(o.length===0&&T>0)throw new Error("Invalid content rule. Cannot have enforce a 'min' of ".concat(T," with no nodeTypes"));if(E.minLength("content",T),o.length===0?E.empty("content"):E.each("content",function(rn,en){var D=new S(rn,en);return D.object()&&D.enum("nodeType",o),D.errors}),E.object("data")){var v=(e=(r=this.validateData)===null||r===void 0?void 0:r.call(this,i.data,a.of("data")))!==null&&e!==void 0?e:[];E.catch.apply(E,v)}return E.errors},t}(),J=function(t){s(i,t);function i(a,r){var e=t.call(this,r,function(E,u){return e.assertLink(E,u)})||this;return e.linkType=a,e.assertLink=function(E,u){var o=new S(E,u);if(o.object("target")){var c=new S(E.target.sys,u.of("target").of("sys"));c.object()&&(c.enum("type",[e.type]),c.enum("linkType",[e.linkType]),e.type==="Link"?(c.string("id"),c.noAdditionalProperties(["type","linkType","id"])):e.type==="ResourceLink"&&(c.string("urn"),c.noAdditionalProperties(["type","linkType","urn"]))),o.catch.apply(o,c.errors)}return o.noAdditionalProperties(["target"]),o.errors},e.type=e.linkType.startsWith("Contentful:")?"ResourceLink":"Link",e}return i}(N),F=function(t){s(i,t);function i(){var a=t.call(this,["text"],function(r,e){return a.assertLink(r,e)})||this;return a.assertLink=function(r,e){var E=new S(r,e);return E.string("uri"),E.noAdditionalProperties(["uri"]),E.errors},a}return i}(N),f=function(t,i){return new N(t,i)},A=function(t,i){return new J(t,i)},Z=function(){function t(i){i===void 0&&(i=[]);var a=this;this.path=i,this.of=function(r){return new t(O(O([],a.path,!0),[r],!1))},this.isRoot=function(){return a.path.length===0},this.last=function(){return a.path[a.path.length-1]},this.toArray=function(){return a.path}}return t}();function x(t,i){var a=new S(t,i);return a.object()&&(a.noAdditionalProperties(["nodeType","data","value","marks"]),a.object("data"),a.each("marks",function(r,e){var E=new S(r,e);return E.object()&&E.string("type"),E.errors}),a.string("value")),a.errors}var L,h=f(O(O([],Object.values(n.INLINES),!0),["text"],!1).sort()),m=f([n.BLOCKS.LIST_ITEM]),b=A("Entry",B),P=f(function(){return{nodeTypes:[n.BLOCKS.PARAGRAPH],min:1}},function(t,i){var a=new S(t,i);return a.noAdditionalProperties(["colspan","rowspan"]),a.number("colspan",!0),a.number("rowspan",!0),a.errors}),nn=(L={},L[n.BLOCKS.DOCUMENT]=f(K),L[n.BLOCKS.PARAGRAPH]=h,L[n.BLOCKS.HEADING_1]=h,L[n.BLOCKS.HEADING_2]=h,L[n.BLOCKS.HEADING_3]=h,L[n.BLOCKS.HEADING_4]=h,L[n.BLOCKS.HEADING_5]=h,L[n.BLOCKS.HEADING_6]=h,L[n.BLOCKS.QUOTE]=f(R[n.BLOCKS.QUOTE]),L[n.BLOCKS.EMBEDDED_ENTRY]=b,L[n.BLOCKS.EMBEDDED_ASSET]=A("Asset",B),L[n.BLOCKS.EMBEDDED_RESOURCE]=A("Contentful:Entry",B),L[n.BLOCKS.HR]=f(B),L[n.BLOCKS.OL_LIST]=m,L[n.BLOCKS.UL_LIST]=m,L[n.BLOCKS.LIST_ITEM]=f(O([],I,!0).sort()),L[n.BLOCKS.TABLE]=f(function(){return{nodeTypes:[n.BLOCKS.TABLE_ROW],min:1}}),L[n.BLOCKS.TABLE_ROW]=f(function(){return{nodeTypes:[n.BLOCKS.TABLE_CELL,n.BLOCKS.TABLE_HEADER_CELL],min:1}}),L[n.BLOCKS.TABLE_CELL]=P,L[n.BLOCKS.TABLE_HEADER_CELL]=P,L[n.INLINES.HYPERLINK]=new F,L[n.INLINES.EMBEDDED_ENTRY]=b,L[n.INLINES.EMBEDDED_RESOURCE]=A("Contentful:Entry",B),L[n.INLINES.ENTRY_HYPERLINK]=A("Entry",["text"]),L[n.INLINES.ASSET_HYPERLINK]=A("Asset",["text"]),L[n.INLINES.RESOURCE_HYPERLINK]=A("Contentful:Entry",["text"]),L);function p(t,i){if(t.nodeType==="text")return x(t,i);var a=nn[t.nodeType].assert(t,i);if(a.length>0)return a;var r=new S(t,i);return r.each("content",function(e,E){return p(e,E)}),r.errors}var tn=function(t){var i=new Z,a=new S(t,i);return a.object()&&a.enum("nodeType",[n.BLOCKS.DOCUMENT]),a.errors.length>0?a.errors:p(t,i)};n.CONTAINERS=R,n.EMPTY_DOCUMENT=w,n.HEADINGS=y,n.LIST_ITEM_BLOCKS=I,n.TABLE_BLOCKS=G,n.TEXT_CONTAINERS=M,n.TOP_LEVEL_BLOCKS=K,n.V1_MARKS=U,n.V1_NODE_TYPES=j,n.VOID_BLOCKS=g,n.helpers=z,n.validateRichTextDocument=tn})(an);export{an as d};
+var an = {},
+    En = n => {
+        if (Object.prototype.toString.call(n) !== "[object Object]") return !1;
+        const _ = Object.getPrototypeOf(n);
+        return _ === null || _ === Object.prototype
+    };
+(function(n) {
+    var _ = En;
+    n.BLOCKS = void 0,
+        function(t) {
+            t.DOCUMENT = "document", t.PARAGRAPH = "paragraph", t.HEADING_1 = "heading-1", t.HEADING_2 = "heading-2", t.HEADING_3 = "heading-3", t.HEADING_4 = "heading-4", t.HEADING_5 = "heading-5", t.HEADING_6 = "heading-6", t.OL_LIST = "ordered-list", t.UL_LIST = "unordered-list", t.LIST_ITEM = "list-item", t.HR = "hr", t.QUOTE = "blockquote", t.EMBEDDED_ENTRY = "embedded-entry-block", t.EMBEDDED_ASSET = "embedded-asset-block", t.EMBEDDED_RESOURCE = "embedded-resource-block", t.TABLE = "table", t.TABLE_ROW = "table-row", t.TABLE_CELL = "table-cell", t.TABLE_HEADER_CELL = "table-header-cell"
+        }(n.BLOCKS || (n.BLOCKS = {})), n.INLINES = void 0,
+        function(t) {
+            t.ASSET_HYPERLINK = "asset-hyperlink", t.EMBEDDED_ENTRY = "embedded-entry-inline", t.EMBEDDED_RESOURCE = "embedded-resource-inline", t.ENTRY_HYPERLINK = "entry-hyperlink", t.HYPERLINK = "hyperlink", t.RESOURCE_HYPERLINK = "resource-hyperlink"
+        }(n.INLINES || (n.INLINES = {})), n.MARKS = void 0,
+        function(t) {
+            t.BOLD = "bold", t.ITALIC = "italic", t.UNDERLINE = "underline", t.CODE = "code", t.SUPERSCRIPT = "superscript", t.SUBSCRIPT = "subscript", t.STRIKETHROUGH = "strikethrough"
+        }(n.MARKS || (n.MARKS = {}));
+    var d = function(t, i) {
+        return d = Object.setPrototypeOf || {
+            __proto__: []
+        }
+        instanceof Array && function(a, r) {
+            a.__proto__ = r
+        } || function(a, r) {
+            for (var e in r) Object.prototype.hasOwnProperty.call(r, e) && (a[e] = r[e])
+        }, d(t, i)
+    };
+
+    function s(t, i) {
+        if (typeof i != "function" && i !== null) throw new TypeError("Class extends value " + String(i) + " is not a constructor or null");
+        d(t, i);
+
+        function a() {
+            this.constructor = t
+        }
+        t.prototype = i === null ? Object.create(i) : (a.prototype = i.prototype, new a)
+    }
+
+    function O(t, i, a) {
+        if (a || arguments.length === 2)
+            for (var r = 0, e = i.length, E; r < e; r++)(E || !(r in i)) && (E || (E = Array.prototype.slice.call(i, 0, r)), E[r] = i[r]);
+        return t.concat(E || Array.prototype.slice.call(i))
+    }
+    typeof SuppressedError == "function" && SuppressedError;
+    var l, K = [n.BLOCKS.PARAGRAPH, n.BLOCKS.HEADING_1, n.BLOCKS.HEADING_2, n.BLOCKS.HEADING_3, n.BLOCKS.HEADING_4, n.BLOCKS.HEADING_5, n.BLOCKS.HEADING_6, n.BLOCKS.OL_LIST, n.BLOCKS.UL_LIST, n.BLOCKS.HR, n.BLOCKS.QUOTE, n.BLOCKS.EMBEDDED_ENTRY, n.BLOCKS.EMBEDDED_ASSET, n.BLOCKS.EMBEDDED_RESOURCE, n.BLOCKS.TABLE],
+        I = [n.BLOCKS.PARAGRAPH, n.BLOCKS.HEADING_1, n.BLOCKS.HEADING_2, n.BLOCKS.HEADING_3, n.BLOCKS.HEADING_4, n.BLOCKS.HEADING_5, n.BLOCKS.HEADING_6, n.BLOCKS.OL_LIST, n.BLOCKS.UL_LIST, n.BLOCKS.HR, n.BLOCKS.QUOTE, n.BLOCKS.EMBEDDED_ENTRY, n.BLOCKS.EMBEDDED_ASSET, n.BLOCKS.EMBEDDED_RESOURCE],
+        G = [n.BLOCKS.TABLE, n.BLOCKS.TABLE_ROW, n.BLOCKS.TABLE_CELL, n.BLOCKS.TABLE_HEADER_CELL],
+        g = [n.BLOCKS.HR, n.BLOCKS.EMBEDDED_ENTRY, n.BLOCKS.EMBEDDED_ASSET, n.BLOCKS.EMBEDDED_RESOURCE],
+        R = (l = {}, l[n.BLOCKS.OL_LIST] = [n.BLOCKS.LIST_ITEM], l[n.BLOCKS.UL_LIST] = [n.BLOCKS.LIST_ITEM], l[n.BLOCKS.LIST_ITEM] = I, l[n.BLOCKS.QUOTE] = [n.BLOCKS.PARAGRAPH], l[n.BLOCKS.TABLE] = [n.BLOCKS.TABLE_ROW], l[n.BLOCKS.TABLE_ROW] = [n.BLOCKS.TABLE_CELL, n.BLOCKS.TABLE_HEADER_CELL], l[n.BLOCKS.TABLE_CELL] = [n.BLOCKS.PARAGRAPH, n.BLOCKS.UL_LIST, n.BLOCKS.OL_LIST], l[n.BLOCKS.TABLE_HEADER_CELL] = [n.BLOCKS.PARAGRAPH], l),
+        y = [n.BLOCKS.HEADING_1, n.BLOCKS.HEADING_2, n.BLOCKS.HEADING_3, n.BLOCKS.HEADING_4, n.BLOCKS.HEADING_5, n.BLOCKS.HEADING_6],
+        M = O([n.BLOCKS.PARAGRAPH], y, !0),
+        j = [n.BLOCKS.DOCUMENT, n.BLOCKS.PARAGRAPH, n.BLOCKS.HEADING_1, n.BLOCKS.HEADING_2, n.BLOCKS.HEADING_3, n.BLOCKS.HEADING_4, n.BLOCKS.HEADING_5, n.BLOCKS.HEADING_6, n.BLOCKS.OL_LIST, n.BLOCKS.UL_LIST, n.BLOCKS.LIST_ITEM, n.BLOCKS.HR, n.BLOCKS.QUOTE, n.BLOCKS.EMBEDDED_ENTRY, n.BLOCKS.EMBEDDED_ASSET, n.INLINES.HYPERLINK, n.INLINES.ENTRY_HYPERLINK, n.INLINES.ASSET_HYPERLINK, n.INLINES.EMBEDDED_ENTRY, "text"],
+        U = [n.MARKS.BOLD, n.MARKS.CODE, n.MARKS.ITALIC, n.MARKS.UNDERLINE],
+        w = {
+            nodeType: n.BLOCKS.DOCUMENT,
+            data: {},
+            content: [{
+                nodeType: n.BLOCKS.PARAGRAPH,
+                data: {},
+                content: [{
+                    nodeType: "text",
+                    value: "",
+                    marks: [],
+                    data: {}
+                }]
+            }]
+        };
+
+    function H(t, i) {
+        for (var a = 0, r = Object.keys(t); a < r.length; a++) {
+            var e = r[a];
+            if (i === t[e]) return !0
+        }
+        return !1
+    }
+
+    function Y(t) {
+        return H(n.INLINES, t.nodeType)
+    }
+
+    function V(t) {
+        return H(n.BLOCKS, t.nodeType)
+    }
+
+    function k(t) {
+        return t.nodeType === "text"
+    }
+    var z = Object.freeze({
+            __proto__: null,
+            isBlock: V,
+            isInline: Y,
+            isText: k
+        }),
+        C = function(t) {
+            var i = t.path,
+                a = t.property,
+                r = t.typeName,
+                e = t.value;
+            return {
+                details: 'The type of "'.concat(a, '" is incorrect, expected type: ').concat(r),
+                name: "type",
+                path: i.toArray(),
+                type: r,
+                value: e
+            }
+        },
+        Q = function(t) {
+            var i = t.min,
+                a = t.value,
+                r = t.path;
+            return {
+                name: "size",
+                min: i,
+                path: r.toArray(),
+                details: "Size must be at least ".concat(i),
+                value: a
+            }
+        },
+        W = function(t) {
+            var i = t.max,
+                a = t.value,
+                r = t.path;
+            return {
+                name: "size",
+                max: i,
+                path: r.toArray(),
+                details: "Size must be at most ".concat(i),
+                value: a
+            }
+        },
+        q = function(t) {
+            var i = t.expected,
+                a = t.value,
+                r = t.path;
+            return {
+                details: "Value must be one of expected values",
+                name: "in",
+                expected: O([], i, !0).sort(),
+                path: r.toArray(),
+                value: a
+            }
+        },
+        $ = function(t) {
+            var i = t.property,
+                a = t.path;
+            return {
+                details: 'The property "'.concat(i, '" is not expected'),
+                name: "unexpected",
+                path: a.toArray()
+            }
+        },
+        X = function(t) {
+            var i = t.property,
+                a = t.path;
+            return {
+                details: 'The property "'.concat(i, '" is required here'),
+                name: "required",
+                path: a.toArray()
+            }
+        },
+        S = function() {
+            function t(i, a) {
+                var r = this;
+                this.obj = i, this.path = a, this._errors = [], this.catch = function() {
+                    for (var e, E = [], u = 0; u < arguments.length; u++) E[u] = arguments[u];
+                    (e = r._errors).push.apply(e, E)
+                }, this.exists = function(e) {
+                    return e in r.obj ? !0 : (r.catch(X({
+                        property: e,
+                        path: r.path.of(e)
+                    })), !1)
+                }, this.object = function(e) {
+                    var E, u = e ? r.obj[e] : r.obj;
+                    if (e && !r.exists(e)) return !1;
+                    if (_(u)) return !0;
+                    var o = e ? r.path.of(e) : r.path,
+                        c = (E = e ?? r.path.last()) !== null && E !== void 0 ? E : "value";
+                    return r.catch(C({
+                        typeName: "Object",
+                        property: c,
+                        path: o,
+                        value: u
+                    })), !1
+                }, this.string = function(e) {
+                    var E = r.obj[e];
+                    return e && !r.exists(e) ? !1 : typeof E == "string" ? !0 : (r.catch(C({
+                        typeName: "String",
+                        property: e,
+                        path: r.path.of(e),
+                        value: E
+                    })), !1)
+                }, this.number = function(e, E) {
+                    var u = r.obj[e];
+                    return E && !(e in r.obj) ? !0 : r.exists(e) ? typeof u == "number" && !Number.isNaN(u) ? !0 : (r.catch(C({
+                        typeName: "Number",
+                        property: e,
+                        path: r.path.of(e),
+                        value: u
+                    })), !1) : !1
+                }, this.array = function(e) {
+                    var E = r.obj[e];
+                    return e && !r.exists(e) ? !1 : Array.isArray(E) ? !0 : (r.catch(C({
+                        typeName: "Array",
+                        property: e,
+                        path: r.path.of(e),
+                        value: E
+                    })), !1)
+                }, this.enum = function(e, E) {
+                    var u = r.obj[e];
+                    return typeof u == "string" && E.includes(u) ? !0 : (r.catch(q({
+                        expected: E,
+                        value: u,
+                        path: r.path.of(e)
+                    })), !1)
+                }, this.empty = function(e) {
+                    if (!r.array(e)) return !1;
+                    var E = r.obj[e];
+                    return E.length === 0 ? !0 : (r.catch(W({
+                        max: 0,
+                        value: E,
+                        path: r.path.of(e)
+                    })), !1)
+                }, this.minLength = function(e, E) {
+                    if (!r.array(e)) return !1;
+                    var u = r.obj[e];
+                    return u.length >= E ? !0 : (r.catch(Q({
+                        min: E,
+                        value: u,
+                        path: r.path.of(e)
+                    })), !1)
+                }, this.noAdditionalProperties = function(e) {
+                    var E = Object.keys(r.obj).sort().filter(function(u) {
+                        return !e.includes(u)
+                    });
+                    return E.forEach(function(u) {
+                        return r.catch($({
+                            property: u,
+                            path: r.path.of(u)
+                        }))
+                    }), E.length === 0
+                }, this.each = function(e, E) {
+                    if (r.array(e)) {
+                        var u = r.obj[e],
+                            o = !1;
+                        u.forEach(function(c, T) {
+                            if (!o) {
+                                var v = E(c, r.path.of(e).of(T));
+                                v.length > 0 && (o = !0), r.catch.apply(r, v)
+                            }
+                        })
+                    }
+                }
+            }
+            return Object.defineProperty(t.prototype, "errors", {
+                get: function() {
+                    var i = this,
+                        a = function(r) {
+                            return JSON.stringify({
+                                details: r.details,
+                                path: r.path
+                            })
+                        };
+                    return this._errors.filter(function(r, e) {
+                        return i._errors.findIndex(function(E) {
+                            return a(r) === a(E)
+                        }) === e
+                    })
+                },
+                enumerable: !1,
+                configurable: !0
+            }), t
+        }(),
+        B = [],
+        N = function() {
+            function t(i, a) {
+                this.contentRule = i, this.validateData = a
+            }
+            return t.prototype.assert = function(i, a) {
+                var r, e, E = new S(i, a);
+                if (!E.object()) return E.errors;
+                E.noAdditionalProperties(["nodeType", "data", "content"]);
+                var u = Array.isArray(this.contentRule) ? {
+                        nodeTypes: this.contentRule
+                    } : this.contentRule(i, a),
+                    o = u.nodeTypes,
+                    c = u.min,
+                    T = c === void 0 ? 0 : c;
+                if (o.length === 0 && T > 0) throw new Error("Invalid content rule. Cannot have enforce a 'min' of ".concat(T, " with no nodeTypes"));
+                if (E.minLength("content", T), o.length === 0 ? E.empty("content") : E.each("content", function(rn, en) {
+                        var D = new S(rn, en);
+                        return D.object() && D.enum("nodeType", o), D.errors
+                    }), E.object("data")) {
+                    var v = (e = (r = this.validateData) === null || r === void 0 ? void 0 : r.call(this, i.data, a.of("data"))) !== null && e !== void 0 ? e : [];
+                    E.catch.apply(E, v)
+                }
+                return E.errors
+            }, t
+        }(),
+        J = function(t) {
+            s(i, t);
+
+            function i(a, r) {
+                var e = t.call(this, r, function(E, u) {
+                    return e.assertLink(E, u)
+                }) || this;
+                return e.linkType = a, e.assertLink = function(E, u) {
+                    var o = new S(E, u);
+                    if (o.object("target")) {
+                        var c = new S(E.target.sys, u.of("target").of("sys"));
+                        c.object() && (c.enum("type", [e.type]), c.enum("linkType", [e.linkType]), e.type === "Link" ? (c.string("id"), c.noAdditionalProperties(["type", "linkType", "id"])) : e.type === "ResourceLink" && (c.string("urn"), c.noAdditionalProperties(["type", "linkType", "urn"]))), o.catch.apply(o, c.errors)
+                    }
+                    return o.noAdditionalProperties(["target"]), o.errors
+                }, e.type = e.linkType.startsWith("Contentful:") ? "ResourceLink" : "Link", e
+            }
+            return i
+        }(N),
+        F = function(t) {
+            s(i, t);
+
+            function i() {
+                var a = t.call(this, ["text"], function(r, e) {
+                    return a.assertLink(r, e)
+                }) || this;
+                return a.assertLink = function(r, e) {
+                    var E = new S(r, e);
+                    return E.string("uri"), E.noAdditionalProperties(["uri"]), E.errors
+                }, a
+            }
+            return i
+        }(N),
+        f = function(t, i) {
+            return new N(t, i)
+        },
+        A = function(t, i) {
+            return new J(t, i)
+        },
+        Z = function() {
+            function t(i) {
+                i === void 0 && (i = []);
+                var a = this;
+                this.path = i, this.of = function(r) {
+                    return new t(O(O([], a.path, !0), [r], !1))
+                }, this.isRoot = function() {
+                    return a.path.length === 0
+                }, this.last = function() {
+                    return a.path[a.path.length - 1]
+                }, this.toArray = function() {
+                    return a.path
+                }
+            }
+            return t
+        }();
+
+    function x(t, i) {
+        var a = new S(t, i);
+        return a.object() && (a.noAdditionalProperties(["nodeType", "data", "value", "marks"]), a.object("data"), a.each("marks", function(r, e) {
+            var E = new S(r, e);
+            return E.object() && E.string("type"), E.errors
+        }), a.string("value")), a.errors
+    }
+    var L, h = f(O(O([], Object.values(n.INLINES), !0), ["text"], !1).sort()),
+        m = f([n.BLOCKS.LIST_ITEM]),
+        b = A("Entry", B),
+        P = f(function() {
+            return {
+                nodeTypes: [n.BLOCKS.PARAGRAPH],
+                min: 1
+            }
+        }, function(t, i) {
+            var a = new S(t, i);
+            return a.noAdditionalProperties(["colspan", "rowspan"]), a.number("colspan", !0), a.number("rowspan", !0), a.errors
+        }),
+        nn = (L = {}, L[n.BLOCKS.DOCUMENT] = f(K), L[n.BLOCKS.PARAGRAPH] = h, L[n.BLOCKS.HEADING_1] = h, L[n.BLOCKS.HEADING_2] = h, L[n.BLOCKS.HEADING_3] = h, L[n.BLOCKS.HEADING_4] = h, L[n.BLOCKS.HEADING_5] = h, L[n.BLOCKS.HEADING_6] = h, L[n.BLOCKS.QUOTE] = f(R[n.BLOCKS.QUOTE]), L[n.BLOCKS.EMBEDDED_ENTRY] = b, L[n.BLOCKS.EMBEDDED_ASSET] = A("Asset", B), L[n.BLOCKS.EMBEDDED_RESOURCE] = A("Contentful:Entry", B), L[n.BLOCKS.HR] = f(B), L[n.BLOCKS.OL_LIST] = m, L[n.BLOCKS.UL_LIST] = m, L[n.BLOCKS.LIST_ITEM] = f(O([], I, !0).sort()), L[n.BLOCKS.TABLE] = f(function() {
+            return {
+                nodeTypes: [n.BLOCKS.TABLE_ROW],
+                min: 1
+            }
+        }), L[n.BLOCKS.TABLE_ROW] = f(function() {
+            return {
+                nodeTypes: [n.BLOCKS.TABLE_CELL, n.BLOCKS.TABLE_HEADER_CELL],
+                min: 1
+            }
+        }), L[n.BLOCKS.TABLE_CELL] = P, L[n.BLOCKS.TABLE_HEADER_CELL] = P, L[n.INLINES.HYPERLINK] = new F, L[n.INLINES.EMBEDDED_ENTRY] = b, L[n.INLINES.EMBEDDED_RESOURCE] = A("Contentful:Entry", B), L[n.INLINES.ENTRY_HYPERLINK] = A("Entry", ["text"]), L[n.INLINES.ASSET_HYPERLINK] = A("Asset", ["text"]), L[n.INLINES.RESOURCE_HYPERLINK] = A("Contentful:Entry", ["text"]), L);
+
+    function p(t, i) {
+        if (t.nodeType === "text") return x(t, i);
+        var a = nn[t.nodeType].assert(t, i);
+        if (a.length > 0) return a;
+        var r = new S(t, i);
+        return r.each("content", function(e, E) {
+            return p(e, E)
+        }), r.errors
+    }
+    var tn = function(t) {
+        var i = new Z,
+            a = new S(t, i);
+        return a.object() && a.enum("nodeType", [n.BLOCKS.DOCUMENT]), a.errors.length > 0 ? a.errors : p(t, i)
+    };
+    n.CONTAINERS = R, n.EMPTY_DOCUMENT = w, n.HEADINGS = y, n.LIST_ITEM_BLOCKS = I, n.TABLE_BLOCKS = G, n.TEXT_CONTAINERS = M, n.TOP_LEVEL_BLOCKS = K, n.V1_MARKS = U, n.V1_NODE_TYPES = j, n.VOID_BLOCKS = g, n.helpers = z, n.validateRichTextDocument = tn
+})(an);
+export {
+    an as d
+};
